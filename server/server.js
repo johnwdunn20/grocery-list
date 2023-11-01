@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const PORT = 3000;
 const app = express();
+const cookieParser = require('cookie-parser')
 require('dotenv').config();
 // standard configs
 app.use(express.json());
@@ -10,8 +11,17 @@ app.use(cookieParser());
 
 // Probably need a router that routes everything to /api
 
+// Testing
+app.get('/', (req, res) => {
+  return res.status(200).send('Test Works!')
+});
 
 
+
+// catch-all
+app.use('*', (req, res) => {
+  return res.status(400).send('The page you are looking for was not found');
+})
 
 // default error handler
 app.use((err, req, res, next) => {
