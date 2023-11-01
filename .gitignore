@@ -1,0 +1,5 @@
+node_modules/
+.env
+client/dist/
+**styles.css
+**styles.css.map
