@@ -1,0 +1,115 @@
+$background: rgb(226, 225, 225);
+$standardBlue: #4EE0FC;
+$primaryBlue: #4E72FC;
+$secondaryBlue: #4EA9FC;
+
+body {
+  background-color: $background;
+  margin: 0;
+  // 100% of viewport?
+}
+
+// nav bar
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 100px;
+  margin-top: 0;
+
+  // set sizing
+  #profile, #hamburger {
+    max-height: 30px;
+    width: auto;
+  }
+  // move away from edges
+  #profile {
+    margin-right: 5px;
+  }
+  #hamburger {
+    margin-left: 5px;
+  }
+}
+
+// main container
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// new item form
+#add-item-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  #new-item-input {
+    width: 20rem;
+    min-height: 20px;
+  }
+  #save-item-button {
+    width: 5rem;
+    min-height: 30px;
+    margin: 2%;
+  }
+}
+
+// shopping list
+#list-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+#list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid black;
+  width: 95%;
+  margin-top: 1%;
+  border-radius: 2%;
+  overflow: scroll;
+  max-height: 60vh;
+
+
+  .aisle-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    // title of each aisle
+    .aisle-title {
+      margin: 5%;
+    }
+  }
+}
+
+// each aisle. the ul of all the items in the aisle
+.items-list {
+  list-style-type: none;
+  margin: 0;
+  width: 70%;
+
+  // individual items
+  li {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid black;
+
+    // checkbox
+    input {
+      height: 30px;
+      width: 30px;
+    }
+
+    // Clear item
+    button {
+      height: 30px;
+      width: 30px;
+      margin-left: auto;
+    }
+  }
+
+}
