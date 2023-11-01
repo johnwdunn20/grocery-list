@@ -30,7 +30,7 @@ module.exports = {
     // only required if there are specific CORS items
     headers: { 'Access-Control-Allow-Origin': '*' },
 
-    //proxy is required in order to make api calls to express server while using hot-reload webpack server routes api fetch requests from localhost:8080/api/* (webpack dev server) to localhost:3000/api/* (where our Express server is running)
+    //proxy is required in order to make api calls to express server while using hot-reload webpack server routes api fetch requests from localhost:8080/api/* (webpack dev server) to localhost:3000/api/* (where our Express server is running). In the client, I can just call to /api/whatever and it will be sent to /whatever. Set up router for everything to be /api
     proxy: {
       '/api/**': { // so all client side request to server need to be prefaced with api/
         target: 'http://localhost:3000/',

@@ -114,7 +114,7 @@ async function main() {
   console.log(completion.choices[0].message.content);
 }
 
-main();
+// main();
 
 // export default main?
 

@@ -1,0 +1,70 @@
+[{
+  "_id": {
+    "$oid": "6542a9e44f57c0e1b1ad0ba4"
+  },
+  "user": {
+    "$oid": "6542a7b6e06d8d00cdf55cb2"
+  },
+  "itemName": "Milk",
+  "checked": false,
+  "category": {
+    "$oid": "6541d71363cd5170e6fd96d2"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6542a9e44f57c0e1b1ad0ba5"
+  },
+  "user": {
+    "$oid": "6542a7b6e06d8d00cdf55cb2"
+  },
+  "itemName": "Yogurt",
+  "checked": true,
+  "category": {
+    "$oid": "6541d71363cd5170e6fd96d2"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6542a9e44f57c0e1b1ad0ba6"
+  },
+  "user": {
+    "$oid": "6542a7b6e06d8d00cdf55cb2"
+  },
+  "itemName": "3 Apples",
+  "checked": true,
+  "category": {
+    "$oid": "6541d71363cd5170e6fd96d0"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6542a9e44f57c0e1b1ad0ba7"
+  },
+  "user": {
+    "$oid": "6542a7b6e06d8d00cdf55cb2"
+  },
+  "itemName": "Peanut Butter Pretzels",
+  "checked": true,
+  "category": {
+    "$oid": "6541d71363cd5170e6fd96d7"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6542a9e44f57c0e1b1ad0ba8"
+  },
+  "user": {
+    "$oid": "6542a7b6e06d8d00cdf55cb2"
+  },
+  "itemName": "Ritz",
+  "checked": true,
+  "category": {
+    "$oid": "6541d71363cd5170e6fd96d7"
+  },
+  "__v": 0
+}]
