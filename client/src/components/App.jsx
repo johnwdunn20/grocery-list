@@ -5,12 +5,14 @@ import Header from './Header';
 import NewItem from './NewItem';
 import ShoppingListContainer from './ShoppingListContainer'
 import SideBar from "./SideBar";
+import Profile from "./Profile";
 
 const App = () => {
 
   const [groceries, setGroceries] = useState([])
   const [newItemToggle, setNewItemToggle] = useState(false);
   const [sideBarClass, setSideBarClass] = useState('sidebar-closed');
+  const [profileClass, setProfileClass] = useState('profile-closed');
 
   // get initial data on page load
   useEffect(() => {
@@ -46,20 +48,29 @@ const App = () => {
       .catch(err => console.log(err));
   }
 
-  // Open the sidebar
+  // Open the sidebar. *** Probably easier with booleans and ternary operators
   const showSideBar = () => {
     setSideBarClass('sidebar-open');
   }
-
   // Close the sidebar
   const closeSideBar = () => {
     setSideBarClass('sidebar-closed');
   }
 
+  // Open the profile
+  const showProfile = () => {
+    setProfileClass('profile-open');
+  }
+  // Close the profile
+  const closeProfile= () => {
+    setProfileClass('profile-closed');
+  }
+
   return (
     <>
       <SideBar sideBarClass={sideBarClass} closeSideBar={closeSideBar}/>
-      <Header showSideBar={showSideBar}/>
+      <Profile profileClass={profileClass} closeProfile ={closeProfile}/>
+      <Header showSideBar={showSideBar} showProfile={showProfile}/>
       
       <main>
         <NewItem saveNewItem={saveNewItem}/>
