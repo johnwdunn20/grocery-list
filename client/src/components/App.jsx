@@ -54,7 +54,7 @@ const App = () => {
     // console.log(e.target.checked);
     // e.target.checked = !e.target.checked;
 
-    const id = e.target.nextSibling.id
+    const id = e.target.nextSibling.id 
     console.log(id);
     fetch(`/api/toggleCheck/${id}`, {
       method: 'PATCH',
