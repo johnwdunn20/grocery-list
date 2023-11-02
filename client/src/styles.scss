@@ -56,13 +56,29 @@ main {
     width: 5rem;
     min-height: 30px;
     margin: 2%;
+    box-shadow: 2px -2px 5px 1px lightgray;
+    color: white;
+    background-color: $primaryBlue;
+    border-radius: 5px;
   }
 }
 
 // shopping list
 #list-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  min-height: 50px;
+
+  input {
+    color: white;
+    background-color: $secondaryBlue;
+    border-radius: 5px;
+    height: 30px;
+    width: auto;
+  }
+
 }
 
 #list-container {
@@ -113,6 +129,9 @@ main {
       height: 30px;
       width: 30px;
       margin-left: auto;
+      color: white;
+      background-color: $secondaryBlue;
+      border-radius: 5px;
     }
   }
 }
@@ -125,7 +144,7 @@ main {
   position: fixed;
   z-index: 1;
   border: 1px solid black;
-  background-color: rgb(188, 187, 187);
+  background-color: rgb(248, 246, 246);
   // transform: translateX(0%);
   // transition: transform 3.5s ease;
 
@@ -137,11 +156,14 @@ main {
     font-size: 2.5rem;
   }
   button {
-    background-color: lightgray;
     align-self: flex-end;
     height: 70px;
     width: 70px;
     border: 1px solid black;
+
+    color: white;
+    background-color: $secondaryBlue;
+    border-radius: 5px;
 
     span {
       font-size: 20rem;

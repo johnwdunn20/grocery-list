@@ -21,7 +21,7 @@ const ShoppingListContainer = ({groceries}) => {
 
   return (
     <>
-      <h3>Shopping List</h3>
+      <h2></h2>
       <section id="list-buttons">
           <input type="button" value="Clear Found Items"/>
           <input type="button" value="Clear All"/>

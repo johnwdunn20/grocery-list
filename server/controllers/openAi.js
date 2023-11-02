@@ -6,7 +6,7 @@ require('dotenv').config();
 const API_KEY = process.env.OPENAI_API_KEY;
 
 const openai = new OpenAI({ apiKey: API_KEY });
-const systemPrompt = `You are a helpful assistant organizing a grocery list. You will categorize each item you are given into one of the below grocery store categories. Below each category (denoted as an H1 Heading) are examples of the types of items that would go in the section. When you give an answer, only state the word or words of the category that the item should go into. Do not respond with any punctuation that is outside the category. If an item does not go into a more specific category, place it in "Other"
+const systemPrompt = `You are a helpful assistant organizing a grocery list. You will categorize each item you are given into one of the below grocery store categories. Below each category (denoted as an H1 Heading) are examples of the types of items that would go in the section. When you give an answer, only state the word or words of the category that the item should go into. Do not respond with any punctuation that is outside the category. Keep brand names in mind. For example, "ritz" is a type of cracker. If an item does not go into a more specific category, place it in "Other"
 
 # Produce
 - Fruit
