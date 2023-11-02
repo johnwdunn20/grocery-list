@@ -32,6 +32,16 @@ apiRouter.get('/groceries',
   return res.status(200).json(res.locals.groceries);
 });
 
+// Add new Item
+apiRouter.post('/addItem',
+  openAIController.getCategory,
+  databaseController.addItem,
+  (req, res) => {
+    console.log(req.body.newItem);
+    return res.status(200).json(res.locals.category)
+  }
+);
+
 
 // catch-all
 app.use('*', (req, res) => {

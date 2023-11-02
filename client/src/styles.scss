@@ -18,14 +18,17 @@ body {
   margin-top: 0;
 
   // set sizing
-  #profile, #hamburger {
+  #profile,
+  #hamburger {
     max-height: 30px;
     width: auto;
   }
+
   // move away from edges
   #profile {
     margin-right: 5px;
   }
+
   #hamburger {
     margin-left: 5px;
   }
@@ -48,6 +51,7 @@ main {
     width: 20rem;
     min-height: 20px;
   }
+
   #save-item-button {
     width: 5rem;
     min-height: 30px;
@@ -111,5 +115,44 @@ main {
       margin-left: auto;
     }
   }
+}
 
+
+// SideBar - when it's shown
+.sidebar-open {
+  width: 70%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  border: 1px solid black;
+  background-color: rgb(188, 187, 187);
+  // transform: translateX(0%);
+  // transition: transform 3.5s ease;
+
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    margin: 2px;
+    font-size: 2.5rem;
+  }
+  button {
+    background-color: lightgray;
+    align-self: flex-end;
+    height: 70px;
+    width: 70px;
+    border: 1px solid black;
+
+    span {
+      font-size: 20rem;
+      font-weight: 600;
+    }
+  }
+}
+// sidebar when it's closed
+.sidebar-closed {
+  display: none;
+  transition: 3.5s ease;
+  // transform: translateX(-100%);
+  // transition: transform 3.5s ease;
 }

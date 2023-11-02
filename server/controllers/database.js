@@ -4,7 +4,7 @@ const databaseController = {};
 
 // Get all groceries and format them for the frontend
 databaseController.getGroceries = (req, res, next) => {
-  models.Grocery.find()
+  models.Grocery.find() // **** Will need to be updated to find the actual user's data
   .populate('category')
   .exec()
     .then(data => {
@@ -47,6 +47,44 @@ databaseController.getGroceries = (req, res, next) => {
       status: 500,
       message: { err },
     }));
+}
+
+databaseController.addItem = (req, res, next) => {
+  const { newItem } = req.body;
+
+  // get id of the category
+  models.Category.findOne({
+    category: res.locals.category
+  })
+    .then(data => {
+      if (!data) {
+        return next({
+          log: `Not able to find category. LLM found ${res.locals.category} which does not exist as a standard category`,
+          status: 500,
+          message: { err: `Not able to find category. LLM found ${res.locals.category} which does not exist as a standard category` },
+        });
+      }
+      console.log(data.id);
+      const categoryId = data.id;
+
+      // use that id to insert into groceries
+      models.Grocery.create({
+        user: '6542a7b6e06d8d00cdf55cb2', // **** hard-coding for now, will update it later
+        itemName: newItem,
+        category: categoryId
+      })
+        .then(data => {
+          console.log('Inserted: ', data);
+          next();
+        })
+    })
+    .catch(err => next({
+      log: `Express error handler caught error in databaseController.getGroceries. Error: ${err}`,
+      status: 500,
+      message: { err },
+    }))
+
+
 }
 
 module.exports = databaseController;

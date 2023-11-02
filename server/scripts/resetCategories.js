@@ -24,6 +24,7 @@ const initialCategories = [
   'Health & Wellness',
   'International Foods',
   'Office & School Supplies',
+  'Other'
 ]
 // delete everything in there to reset it
 // models.Category.deleteMany({}).exec()
