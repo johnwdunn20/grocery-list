@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Item from './Item'
 
-const Aisle = ({ aisleTitle, itemsArr, deleteItem }) => {
+const Aisle = ({ aisleTitle, itemsArr, deleteItem, toggleCheck }) => {
 
   const [itemElems, setItemElems] = useState();
 
@@ -15,6 +15,7 @@ const Aisle = ({ aisleTitle, itemsArr, deleteItem }) => {
           itemName={itemObj.itemName}
           checked={itemObj.checked}
           deleteItem={deleteItem}
+          toggleCheck={toggleCheck}
         />
       );
     }))

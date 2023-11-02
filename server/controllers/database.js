@@ -5,15 +5,15 @@ const databaseController = {};
 // Get all groceries and format them for the frontend
 databaseController.getGroceries = (req, res, next) => {
   models.Grocery.find() // **** Will need to be updated to find the actual user's data
-  .populate('category')
-  .exec()
+    .populate('category')
+    .exec()
     .then(data => {
       console.log('Getting data');
       /*** Formatting data for the front end */
       // 1. Get initial formatting
       const initialFormat = [];
-      data.forEach( obj => {
-        const {itemName, checked, category, id} = obj;
+      data.forEach(obj => {
+        const { itemName, checked, category, id } = obj;
         const categoryName = category.category;
         initialFormat.push({
           itemName,
@@ -38,7 +38,7 @@ databaseController.getGroceries = (req, res, next) => {
         category,
         items: categorized[category]
       }));
-      
+
       // console.log(outputArrOfObjs);
       // Store in res.locals and call next
       res.locals.groceries = outputArrOfObjs;
@@ -96,16 +96,36 @@ databaseController.deleteItem = (req, res, next) => {
   models.Grocery
     .findByIdAndDelete(id)
     .exec()
-      .then(data => {
-        console.log('Deleted: ', data);
-        res.locals.deletedItem = data;
-        return next();
-      })
-      .catch(err => next({
-        log: `Express error handler caught error in databaseController.deleteItem. Error: ${err}`,
-        status: 500,
-        message: { err },
-      }))
+    .then(data => {
+      console.log('Deleted: ', data);
+      res.locals.deletedItem = data;
+      return next();
+    })
+    .catch(err => next({
+      log: `Express error handler caught error in databaseController.deleteItem. Error: ${err}`,
+      status: 500,
+      message: { err },
+    }))
+}
+
+databaseController.toggleCheck = (req, res, next) => {
+  console.log('invoking toggleItem controller');
+  const id = req.params.id;
+  const { checked } = req.body;
+  console.log(id);
+  models.Grocery
+    .findByIdAndUpdate(id, { checked: checked })
+    .exec()
+    .then(data => {
+      console.log('Updated', data);
+      res.locals.updatedItem = data;
+      return next();
+    })
+    .catch(err => next({
+      log: `Express error handler caught error in databaseController.toggleCheck. Error: ${err}`,
+      status: 500,
+      message: { err },
+    }))
 }
 
 module.exports = databaseController;

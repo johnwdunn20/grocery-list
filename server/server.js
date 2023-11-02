@@ -51,6 +51,13 @@ apiRouter.delete('/deleteItem/:id',
   }
 );
 
+// Toggle Checbox
+apiRouter.patch('/toggleCheck/:id',
+  databaseController.toggleCheck,
+  (req, res) => {
+    return res.status(200).json(res.locals.updatedItem);
+  }
+);
 
 // catch-all
 app.use('*', (req, res) => {
