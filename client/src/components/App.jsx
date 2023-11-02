@@ -77,7 +77,8 @@ const App = () => {
     // immediately remove elem (if there's a db error, will reappear on page refresh)
     // need to refresh page in case you deleted an entire aisle
 
-    e.target.parentElement.parentElement.remove()
+    // this errors *sometimes*
+    // e.target.parentElement.parentElement.remove()
     console.log('Sending request to delete: ', id);
     fetch(`/api/deleteItem/${id}`, {
       method: 'DELETE'
