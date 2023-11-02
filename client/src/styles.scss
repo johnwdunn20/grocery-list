@@ -34,7 +34,7 @@ body {
   }
 }
 
-// main container
+// main container (also updates the login page)
 main {
   display: flex;
   flex-direction: column;
@@ -213,4 +213,30 @@ main {
 
 .profile-closed {
   display: none;
+}
+
+// login container
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $secondaryBlue;
+  padding: 10%;
+  margin: 10%;
+  border-radius: 5%;
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10%;
+  }
+
+  #submit-button {
+    margin: 10%;
+    color: white;
+    background-color: $primaryBlue;
+    border-radius: 5px;
+  }
 }
