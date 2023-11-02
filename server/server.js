@@ -20,7 +20,6 @@ app.get('/', (req, res) => {
   return res.status(200).send('Test Works!')
 });
 
-
 // Probably need a router that routes everything to /api
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
@@ -39,6 +38,16 @@ apiRouter.post('/addItem',
   (req, res) => {
     console.log(req.body.newItem);
     return res.status(200).json(res.locals.category)
+  }
+);
+
+// Delete item
+apiRouter.delete('/deleteItem/:id',
+  databaseController.deleteItem,
+  (req, res) => {
+    const id = req.params.id;
+    console.log('id: ', id);
+    res.status(200).json(res.locals.deletedItem);
   }
 );
 

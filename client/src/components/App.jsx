@@ -19,18 +19,18 @@ const App = () => {
     fetch('/api/groceries')
       .then(response => response.json())
       .then(data => {
-        console.log('Data is below:');
         setGroceries(data);
       })
       .catch(err => console.log(err));
 
-  }, [setNewItemToggle]);
+  }, [newItemToggle]);
 
   // Ability to save new item
   const saveNewItem = (e) => {
     e.preventDefault();
     const inputElem = e.target.querySelector('#new-item-input');
     const newItem = inputElem.value;
+    if (newItem === '') return;
     inputElem.value =  '';
     fetch('/api/addItem', {
       method: 'POST',
@@ -47,6 +47,23 @@ const App = () => {
       })
       .catch(err => console.log(err));
   }
+
+
+  // Delete an item
+  const deleteItem = (e) => {
+    // probably an easier way to get the form id
+    const id = e.target.parentElement.previousSibling.id;
+    console.log('Sending request to delete: ', id);
+    fetch(`/api/deleteItem/${id}`, {
+      method: 'DELETE'
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Deleted: ', data);
+        if(data) setNewItemToggle(!newItemToggle);
+      })
+      .catch(err => console.log(err));
+  };
 
   // Open the sidebar. *** Probably easier with booleans and ternary operators
   const showSideBar = () => {
@@ -74,7 +91,7 @@ const App = () => {
       
       <main>
         <NewItem saveNewItem={saveNewItem}/>
-        <ShoppingListContainer groceries={groceries}/>
+        <ShoppingListContainer groceries={groceries} deleteItem={deleteItem}/>
       </main>
     </>
   );

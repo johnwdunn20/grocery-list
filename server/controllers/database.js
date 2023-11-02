@@ -8,26 +8,28 @@ databaseController.getGroceries = (req, res, next) => {
   .populate('category')
   .exec()
     .then(data => {
+      console.log('Getting data');
       /*** Formatting data for the front end */
       // 1. Get initial formatting
       const initialFormat = [];
       data.forEach( obj => {
-        const {itemName, checked, category} = obj;
+        const {itemName, checked, category, id} = obj;
         const categoryName = category.category;
         initialFormat.push({
           itemName,
           checked,
-          categoryName
+          categoryName,
+          id
         })
       })
       // console.log(initialFormat);
       // 2. Format as an array
       const categorized = initialFormat.reduce((acc, curr) => {
-        const { itemName, checked, categoryName } = curr;
+        const { itemName, checked, categoryName, id } = curr;
         if (!acc[categoryName]) {
           acc[categoryName] = [];
         }
-        acc[categoryName].push({ itemName, checked });
+        acc[categoryName].push({ itemName, checked, id });
         return acc;
       }, {});
       // console.log(categorized);
@@ -85,6 +87,25 @@ databaseController.addItem = (req, res, next) => {
     }))
 
 
+}
+
+databaseController.deleteItem = (req, res, next) => {
+  console.log('invoking deleteItem controller');
+  const id = req.params.id
+  console.log(id);
+  models.Grocery
+    .findByIdAndDelete(id)
+    .exec()
+      .then(data => {
+        console.log('Deleted: ', data);
+        res.locals.deletedItem = data;
+        return next();
+      })
+      .catch(err => next({
+        log: `Express error handler caught error in databaseController.deleteItem. Error: ${err}`,
+        status: 500,
+        message: { err },
+      }))
 }
 
 module.exports = databaseController;

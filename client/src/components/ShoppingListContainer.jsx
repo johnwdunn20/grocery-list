@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Aisle from './Aisle'
 
-const ShoppingListContainer = ({groceries}) => {
+const ShoppingListContainer = ({groceries, deleteItem}) => {
   console.log('Groceries: ', groceries);
 
   const [aisleElems, setAisleElems] = useState([])
@@ -14,6 +14,7 @@ const ShoppingListContainer = ({groceries}) => {
           aisleTitle={aisleNameAndItems.category}
           key={aisleNameAndItems.category}
           itemsArr={aisleNameAndItems.items}
+          deleteItem={deleteItem}
         />
       );
     }))
