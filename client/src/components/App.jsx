@@ -7,7 +7,6 @@ import Login from "./Login";
 
 const App = () => {
 
-
   return (
     <Routes>
       <Route path="/" element={<HomePage/>}/>
