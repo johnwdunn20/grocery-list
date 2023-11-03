@@ -1,7 +1,13 @@
-$background: rgb(226, 225, 225);
-$standardBlue: #4EE0FC;
-$primaryBlue: #4E72FC;
-$secondaryBlue: #4EA9FC;
+$background: #FAFAFA;
+$secondaryBackgroud: #F5F5F5;
+$primaryBlue: #1565C0;
+$secondaryBlue: #4FC3F7;
+$tertiaryBlue: #B3E5FC;
+$accentColor: #FF6B6B;
+$primaryTextColor: #263238;
+$secondaryTextColor: #757575;
+$primaryButtonHoverColor: rgb(3, 118, 249);
+$secondaryButtonHoverColor: #39b7f1;
 
 body {
   background-color: $background;
@@ -16,6 +22,7 @@ body {
   justify-content: space-between;
   max-height: 100px;
   margin-top: 0;
+  color: $primaryBlue;
 
   // set sizing
   #profile,
@@ -61,6 +68,9 @@ main {
     background-color: $primaryBlue;
     border-radius: 5px;
   }
+  #save-item-button:hover {
+    background-color: $primaryButtonHoverColor;
+  }
 }
 
 // shopping list
@@ -77,6 +87,8 @@ main {
     border-radius: 5px;
     height: 30px;
     width: auto;
+    box-shadow: 2px -2px 5px 1px lightgray;
+
   }
 
 }
@@ -101,6 +113,7 @@ main {
     // title of each aisle
     .aisle-title {
       margin: 5%;
+      color: $primaryBlue;
     }
   }
 }
@@ -117,12 +130,20 @@ main {
     align-items: center;
     width: 100%;
     border-bottom: 1px solid black;
+    color: $primaryTextColor;
 
     // checkbox
-    input {
+    input[type=checkbox] {
       height: 30px;
       width: 30px;
+      background-color: $secondaryBlue;
+      // accent-color: $secondaryBlue;
+      color: white;
+      border-radius: 5px;
+      padding: 0;
+      box-shadow: 2px -2px 5px 1px lightgray;
     }
+    
 
     // Clear item
     button {
@@ -132,6 +153,12 @@ main {
       color: white;
       background-color: $secondaryBlue;
       border-radius: 5px;
+      padding: 0;
+      box-shadow: 2px -2px 5px 1px lightgray;
+    }
+
+    button:hover {
+      background-color: $secondaryButtonHoverColor;
     }
   }
 }
@@ -144,7 +171,7 @@ main {
   position: fixed;
   z-index: 1;
   border: 1px solid black;
-  background-color: rgb(248, 246, 246);
+  background-color: $secondaryBackgroud;
   // transform: translateX(0%);
   // transition: transform 3.5s ease;
 
@@ -154,7 +181,9 @@ main {
   h1 {
     margin: 2px;
     font-size: 2.5rem;
+    color: $primaryBlue;
   }
+
   button {
     align-self: flex-end;
     height: 70px;
@@ -171,6 +200,7 @@ main {
     }
   }
 }
+
 // sidebar when it's closed
 .sidebar-closed {
   display: none;
@@ -188,7 +218,7 @@ main {
   width: 30%;
   height: 10%;
   border: 1px solid black;
-  background-color: rgb(248, 246, 246);
+  background-color: $secondaryBackgroud;
 
   display: flex;
   flex-direction: column;
@@ -238,5 +268,9 @@ main {
     color: white;
     background-color: $primaryBlue;
     border-radius: 5px;
+    box-shadow: 2px -2px 5px 1px lightgray;
+  }
+  #submit-button:hover {
+    background-color: $primaryButtonHoverColor;
   }
 }
