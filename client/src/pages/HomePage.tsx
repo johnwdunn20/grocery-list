@@ -10,9 +10,9 @@ import Profile from "../components/Profile";
 const HomePage = () => {
 
   const [groceries, setGroceries] = useState([])
-  const [newItemToggle, setNewItemToggle] = useState(false);
-  const [sideBarClass, setSideBarClass] = useState('sidebar-closed');
-  const [profileClass, setProfileClass] = useState('profile-closed');
+  const [newItemToggle, setNewItemToggle] = useState<boolean>(false);
+  const [sideBarOpen, setSideBarOpen] = useState<boolean>(false);
+  const [profileOpen, setProfileOpen] = useState<boolean>(false);
 
   // get initial data on page load
   useEffect(() => {
@@ -93,27 +93,27 @@ const HomePage = () => {
 
   // Open the sidebar. *** Probably easier with booleans and ternary operators
   const showSideBar = () => {
-    setSideBarClass('sidebar-open');
+    setSideBarOpen(true);
   }
   // Close the sidebar
   const closeSideBar = () => {
-    setSideBarClass('sidebar-closed');
+    setSideBarOpen(false);
   }
 
   // Open the profile
   const showProfile = () => {
-    setProfileClass('profile-open');
+    setProfileOpen(true);
   }
   // Close the profile
   const closeProfile = () => {
-    setProfileClass('profile-closed');
+    setProfileOpen(false);
   }
 
   return (
     <>
       <div className="bg-secondaryBackgroud sticky top-0 z-50">
-        <SideBar sideBarClass={sideBarClass} closeSideBar={closeSideBar} />
-        <Profile profileClass={profileClass} closeProfile={closeProfile} />
+        <SideBar sideBarOpen={sideBarOpen} closeSideBar={closeSideBar} />
+        <Profile profileOpen={profileOpen} closeProfile={closeProfile} />
         <Header showSideBar={showSideBar} showProfile={showProfile} />
       </div>
 
