@@ -9,159 +9,159 @@ $secondaryTextColor: #757575;
 $primaryButtonHoverColor: rgb(3, 118, 249);
 $secondaryButtonHoverColor: #39b7f1;
 
-body {
-  background-color: $background;
-  margin: 0;
-  // 100% of viewport?
-}
+// body {
+//   background-color: $background;
+//   margin: 0;
+//   // 100% of viewport?
+// }
 
 // nav bar
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-height: 100px;
-  margin-top: 0;
-  color: $primaryBlue;
+// .header {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   max-height: 100px;
+//   margin-top: 0;
+//   color: $primaryBlue;
 
-  // set sizing
-  #profile,
-  #hamburger {
-    max-height: 30px;
-    width: auto;
-  }
+//   // set sizing
+//   #profile,
+//   #hamburger {
+//     max-height: 30px;
+//     width: auto;
+//   }
 
-  // move away from edges
-  #profile {
-    margin-right: 5px;
-  }
+//   // move away from edges
+//   #profile {
+//     margin-right: 5px;
+//   }
 
-  #hamburger {
-    margin-left: 5px;
-  }
-}
+//   #hamburger {
+//     margin-left: 5px;
+//   }
+// }
 
 // main container (also updates the login page)
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+// main {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
 
 // new item form
-#add-item-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+// #add-item-form {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
 
-  #new-item-input {
-    width: 20rem;
-    min-height: 20px;
-  }
+//   #new-item-input {
+//     width: 20rem;
+//     min-height: 20px;
+//   }
 
-  #save-item-button {
-    width: 5rem;
-    min-height: 30px;
-    margin: 2%;
-    box-shadow: 2px -2px 5px 1px lightgray;
-    color: white;
-    background-color: $primaryBlue;
-    border-radius: 5px;
-  }
-  #save-item-button:hover {
-    background-color: $primaryButtonHoverColor;
-  }
-}
+//   #save-item-button {
+//     width: 5rem;
+//     min-height: 30px;
+//     margin: 2%;
+//     box-shadow: 2px -2px 5px 1px lightgray;
+//     color: white;
+//     background-color: $primaryBlue;
+//     border-radius: 5px;
+//   }
+//   #save-item-button:hover {
+//     background-color: $primaryButtonHoverColor;
+//   }
+// }
 
-// shopping list
-#list-buttons {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-  min-height: 50px;
+// // shopping list
+// #list-buttons {
+//   display: flex;
+//   justify-content: space-evenly;
+//   align-items: center;
+//   width: 100%;
+//   min-height: 50px;
 
-  input {
-    color: white;
-    background-color: $secondaryBlue;
-    border-radius: 5px;
-    height: 30px;
-    width: auto;
-    box-shadow: 2px -2px 5px 1px lightgray;
+//   input {
+//     color: white;
+//     background-color: $secondaryBlue;
+//     border-radius: 5px;
+//     height: 30px;
+//     width: auto;
+//     box-shadow: 2px -2px 5px 1px lightgray;
 
-  }
+//   }
 
-}
+// }
 
-#list-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border: 1px solid black;
-  width: 95%;
-  margin-top: 1%;
-  border-radius: 2%;
-  overflow: scroll;
-  max-height: 60vh;
+// #list-container {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   border: 1px solid black;
+//   width: 95%;
+//   margin-top: 1%;
+//   border-radius: 2%;
+//   overflow: scroll;
+//   max-height: 60vh;
 
 
-  .aisle-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+//   .aisle-container {
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
 
-    // title of each aisle
-    .aisle-title {
-      margin: 5%;
-      color: $primaryBlue;
-    }
-  }
-}
+//     // title of each aisle
+//     .aisle-title {
+//       margin: 5%;
+//       color: $primaryBlue;
+//     }
+//   }
+// }
 
-// each aisle. the ul of all the items in the aisle
-.items-list {
-  list-style-type: none;
-  margin: 0;
-  width: 70%;
+// // each aisle. the ul of all the items in the aisle
+// .items-list {
+//   list-style-type: none;
+//   margin: 0;
+//   width: 70%;
 
-  // individual items
-  li {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border-bottom: 1px solid black;
-    color: $primaryTextColor;
+//   // individual items
+//   li {
+//     display: flex;
+//     align-items: center;
+//     width: 100%;
+//     border-bottom: 1px solid black;
+//     color: $primaryTextColor;
 
-    // checkbox
-    input[type=checkbox] {
-      height: 30px;
-      width: 30px;
-      background-color: $secondaryBlue;
-      // accent-color: $secondaryBlue;
-      color: white;
-      border-radius: 5px;
-      padding: 0;
-      box-shadow: 2px -2px 5px 1px lightgray;
-    }
+//     // checkbox
+//     input[type=checkbox] {
+//       height: 30px;
+//       width: 30px;
+//       background-color: $secondaryBlue;
+//       // accent-color: $secondaryBlue;
+//       color: white;
+//       border-radius: 5px;
+//       padding: 0;
+//       box-shadow: 2px -2px 5px 1px lightgray;
+//     }
     
 
-    // Clear item
-    button {
-      height: 30px;
-      width: 30px;
-      margin-left: auto;
-      color: white;
-      background-color: $secondaryBlue;
-      border-radius: 5px;
-      padding: 0;
-      box-shadow: 2px -2px 5px 1px lightgray;
-    }
+//     // Clear item
+//     button {
+//       height: 30px;
+//       width: 30px;
+//       margin-left: auto;
+//       color: white;
+//       background-color: $secondaryBlue;
+//       border-radius: 5px;
+//       padding: 0;
+//       box-shadow: 2px -2px 5px 1px lightgray;
+//     }
 
-    button:hover {
-      background-color: $secondaryButtonHoverColor;
-    }
-  }
-}
+//     button:hover {
+//       background-color: $secondaryButtonHoverColor;
+//     }
+//   }
+// }
 
 
 // SideBar - when it's shown

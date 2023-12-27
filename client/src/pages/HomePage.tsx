@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 // Components
-import Header from './Header';
-import NewItem from './NewItem';
-import ShoppingListContainer from './ShoppingListContainer'
-import SideBar from "./SideBar";
-import Profile from "./Profile";
+import Header from '../components/Header';
+import NewItem from '../components/NewItem';
+import ShoppingListContainer from '../components/ShoppingListContainer'
+import SideBar from "../components/SideBar";
+import Profile from "../components/Profile";
 
 const HomePage = () => {
 
@@ -111,9 +111,11 @@ const HomePage = () => {
 
   return (
     <>
-      <SideBar sideBarClass={sideBarClass} closeSideBar={closeSideBar} />
-      <Profile profileClass={profileClass} closeProfile={closeProfile} />
-      <Header showSideBar={showSideBar} showProfile={showProfile} />
+      <div className="bg-secondaryBackgroud sticky top-0 z-50">
+        <SideBar sideBarClass={sideBarClass} closeSideBar={closeSideBar} />
+        <Profile profileClass={profileClass} closeProfile={closeProfile} />
+        <Header showSideBar={showSideBar} showProfile={showProfile} />
+      </div>
 
       <main>
         <NewItem saveNewItem={saveNewItem} />
