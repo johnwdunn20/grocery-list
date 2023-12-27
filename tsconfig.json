@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "outDir": "./client/dist/",    // path to output directory
+    "sourceMap": true,        // generate sourcemaps for better debugging
+    "noImplicitAny": false,    // raise error on expressions and declarations with an implied 'any' type
+    "module": "commonjs",     // specify module code generation
+    "target": "es5",          // specify ECMAScript target version
+    "jsx": "react",           // support for JSX (use "preserve" if using React)
+    "allowJs": true,          // allow JavaScript files to be compiled
+    "esModuleInterop": true,  // enables ES6-style imports
+    "skipLibCheck": true,      // skip type checking of all declaration files (*.d.ts)
+    "strictNullChecks": false, // change later
+    "strictFunctionTypes": false, // change later
+  },
+  "include": [
+    "client/src/**/*",             // path to your source files
+    "server/**/*"
+  ],
+  "exclude": [
+    "node_modules",          // exclude the node_modules directory
+  ]
+}

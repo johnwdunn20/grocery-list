@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development', // I don't think I need this because setting this in pacakage.json scripts
   entry: [
-    './client/src/index.js'
+    './client/src/index.tsx'
   ],
   output: {
     filename: 'bundle.js',
@@ -41,12 +41,17 @@ module.exports = {
   module: {
     rules: [
       // load react
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //   }
+      // },
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        }
+        test: /\.(ts|tsx)$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       },
       // load css/scss
       {
@@ -55,7 +60,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|svg|gif)$/i,
         use: [
           {
             loader: "file-loader",
@@ -71,6 +76,6 @@ module.exports = {
   ],
   resolve: {
     // Enable importing JS / JSX files without specifying their extension in react components
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 }
