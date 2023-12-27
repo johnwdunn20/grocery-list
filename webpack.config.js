@@ -3,13 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development', // I don't think I need this because setting this in pacakage.json scripts
-  entry: [
-    './client/src/index.tsx'
-  ],
+  entry: './client/src/index.tsx',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'client/dist'), // often called build but doesn't matter as long as it's consistent
-    // check all of this
+    path: path.resolve(__dirname, 'dist'),
   },
   // devtool: 'eval-source-map', // improves debugging capabilities ?
   devServer: {
@@ -53,12 +50,22 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/
       },
-      // load css/scss
+      // load scss
       {
-        test: /.(css|scss)$/,
+        test: /\.scss$/,
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      // load css
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+        ],
+      },
+      
       {
         test: /\.(png|jpe?g|svg|gif)$/i,
         use: [

@@ -7,7 +7,8 @@ const Item = ({itemName, checked, id, deleteItem, toggleCheck}) => {
       {/* onChange is a placeholder right now and doesn't work*/}
       <input type="checkbox" checked={checked} onChange={(e) => !e.target.checked } onClick={toggleCheck}/>
       <label id={id} htmlFor="">{itemName}</label>
-      <button onClick={deleteItem}><span>&times;</span></button>
+      <button  onClick={deleteItem}><span>&times;</span></button>
+      <div className="border-red-500">hello</div>
     </li>
   );
 }
