@@ -59,9 +59,10 @@ const HomePage = () => {
 
   // Ability to check an item
   const toggleCheck = (e) => {
-    // should immediately check it in the UI, but checked is a state that's part of groceries so maybe has to go through that state?? And therefore easiest way is through db??
-    // console.log(e.target.checked);
-    // e.target.checked = !e.target.checked;
+    // update state so that it's updated in the UI
+    // setGroceries(groceries.map(grocery => {
+    //   grocery.id === id ? { ...grocery, checked: !grocery.checked } : grocery
+    // } ));
 
     const id = e.target.nextSibling.id 
     // console.log(id);

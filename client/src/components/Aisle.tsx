@@ -25,7 +25,7 @@ const Aisle = ({ aisleTitle, itemsArr, deleteItem, toggleCheck }) => {
   return (
     <>
     <section className="m-2 rounded w-full">
-      <h1 className=" text-primaryBlue">{aisleTitle}</h1>
+    <h1 className="text-primaryBlue text-2xl font-semibold mb-2">{aisleTitle}</h1>
       <ul className="">
         {itemElems}
       </ul>
