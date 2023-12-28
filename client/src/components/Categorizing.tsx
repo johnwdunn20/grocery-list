@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+import arrow from '../images/arrow.svg'
 
 const Categorizing = ({ lastCategory, newItem, setNewItem }) => {
 
@@ -17,13 +18,19 @@ const Categorizing = ({ lastCategory, newItem, setNewItem }) => {
   }, [newItem, lastCategory, setNewItem]);
 
   return (
-    <section className={` newCategorization flex justify-between items-center w-full h-12 rounded-md mt-2 text-white transition-all duration-500 ease-in-out transform ${show ? 'translate-y-0 bg-green-700 border-2' : 'translate-y-full'}`}>
-      {newItem && <p className='pl-4'>{newItem}</p>}
-      {newItem && !lastCategory && <div className='spinner'></div>}
-      {lastCategory && newItem && <p className='pr-4'>{lastCategory}</p>}
-    </section>
+    <>
+      <section className={`newCategorization flex justify-around items-center w-full h-12 rounded-md mt-2 text-white transition-all duration-500 ease-in-out transform ${show ? 'translate-y-0 bg-green-700 border-2' : 'translate-y-full'}`}>
+        {newItem && <p className='pl-4 text-lg'>{newItem}</p>}
+        {newItem &&
+          <div className='container w-auto h-full flex items-center justify-center'>
+            <img className='h-full' alt='arrow' src={arrow}></img>
+          </div>}
+        {newItem && !lastCategory && <div className='spinner'></div>}
+        {lastCategory && newItem && <p className='pr-4 font-semibold'>{lastCategory}</p>}
+      </section>
+    </>
   )
-  
+
 }
 
 export default Categorizing
