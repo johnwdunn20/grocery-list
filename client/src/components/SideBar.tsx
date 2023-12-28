@@ -2,7 +2,7 @@ import React from 'react'
 
 const SideBar = (props) => {
 
-  console.log('sideBarOpen: ', props.sideBarOpen);
+  // console.log('sideBarOpen: ', props.sideBarOpen);
   return (
     <>
       {/* <nav id="sideMenu" className={`fixed top-0 right-0 w-80 h-full z-20 bg-gray-800 shadow-lg transform ${props.sideBarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>

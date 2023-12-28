@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Aisle from './Aisle'
-
 const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck }) => {
-  console.log('Groceries: ', groceries);
+  // console.log('Groceries: ', groceries);
 
   const [aisleElems, setAisleElems] = useState([])
 
   useEffect(() => {
     setAisleElems(groceries.map(aisleNameAndItems => {
-      console.log('useEffect in ShoppingListContainer');
+      // console.log('useEffect in ShoppingListContainer');
       return (
         <Aisle
           aisleTitle={aisleNameAndItems.category}
@@ -26,8 +25,8 @@ const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck }) => {
 
       <div className="p-4 w-full lg:w-3/4 xl:w-2/3 mx-auto">
         <section className="flex justify-evenly mb-4">
-          <button className="bg-secondaryBlue text-white rounded-md py-2 px-4 shadow-md">Clear Found Items</button>
-          <button className="bg-secondaryBlue text-white rounded-md py-2 px-4 shadow-md">Clear All</button>
+        <button className="bg-secondaryBlue text-white rounded-md py-2 px-4 shadow-md hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-200 ease-in-out">Clear Found Items</button>
+        <button className="bg-secondaryBlue text-white rounded-md py-2 px-4 shadow-md hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-200 ease-in-out">Clear All</button>
         </section>
         <section className="flex flex-col items-start w-full">
           {aisleElems}

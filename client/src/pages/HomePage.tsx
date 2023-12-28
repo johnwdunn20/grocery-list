@@ -10,7 +10,13 @@ import Profile from "../components/Profile";
 const HomePage = () => {
 
   const [groceries, setGroceries] = useState([])
+
+  const [lastCategory, setLastCategory] = useState<string>('');
+  const [newItem, setNewItem] = useState<string>('');
+  
   const [newItemToggle, setNewItemToggle] = useState<boolean>(false);
+  
+  // toggle side bar and profile
   const [sideBarOpen, setSideBarOpen] = useState<boolean>(false);
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
 
@@ -30,6 +36,7 @@ const HomePage = () => {
     e.preventDefault();
     const inputElem = e.target.querySelector('#new-item-input');
     const newItem = inputElem.value;
+    setNewItem(newItem);
     if (newItem === '') return;
     inputElem.value = '';
     fetch('/api/addItem', {
@@ -42,7 +49,9 @@ const HomePage = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        // set last category
+        setLastCategory(data);
+        console.log('New category: ', data);
         if (data) setNewItemToggle(!newItemToggle);
       })
       .catch(err => console.log(err));
@@ -55,7 +64,7 @@ const HomePage = () => {
     // e.target.checked = !e.target.checked;
 
     const id = e.target.nextSibling.id 
-    console.log(id);
+    // console.log(id);
     fetch(`/api/toggleCheck/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -118,7 +127,7 @@ const HomePage = () => {
       </div>
 
       <main>
-        <NewItem saveNewItem={saveNewItem} />
+        <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} setNewItem={setNewItem} />
         <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck}/>
       </main>
     </>

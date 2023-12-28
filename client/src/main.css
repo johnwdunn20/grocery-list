@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  @apply inline-block w-8 h-8 border-4 rounded-full;
+  border-color: #4fd1c5 transparent #4fd1c5 transparent;
+  animation: spin 1.2s linear infinite;
+}
+
+.newCategorization {
+  transition: all 0.5s ease-in-out;
+  transform: translateY(100%);
+}
+
+.newCategorization.translate-y-0 {
+  transform: translateY(0);
+}
+
+.newCategorization.bg-green-700 {
+  background-color: #2F855A;
+  border: 2px solid;
+}
