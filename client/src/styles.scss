@@ -9,268 +9,268 @@ $secondaryTextColor: #757575;
 $primaryButtonHoverColor: rgb(3, 118, 249);
 $secondaryButtonHoverColor: #39b7f1;
 
-body {
-  background-color: $background;
-  margin: 0;
-  // 100% of viewport?
-}
+// body {
+//   background-color: $background;
+//   margin: 0;
+//   // 100% of viewport?
+// }
 
 // nav bar
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-height: 100px;
-  margin-top: 0;
-  color: $primaryBlue;
+// .header {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   max-height: 100px;
+//   margin-top: 0;
+//   color: $primaryBlue;
 
-  // set sizing
-  #profile,
-  #hamburger {
-    max-height: 30px;
-    width: auto;
-  }
+//   // set sizing
+//   #profile,
+//   #hamburger {
+//     max-height: 30px;
+//     width: auto;
+//   }
 
-  // move away from edges
-  #profile {
-    margin-right: 5px;
-  }
+//   // move away from edges
+//   #profile {
+//     margin-right: 5px;
+//   }
 
-  #hamburger {
-    margin-left: 5px;
-  }
-}
+//   #hamburger {
+//     margin-left: 5px;
+//   }
+// }
 
 // main container (also updates the login page)
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+// main {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
 
 // new item form
-#add-item-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+// #add-item-form {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
 
-  #new-item-input {
-    width: 20rem;
-    min-height: 20px;
-  }
+//   #new-item-input {
+//     width: 20rem;
+//     min-height: 20px;
+//   }
 
-  #save-item-button {
-    width: 5rem;
-    min-height: 30px;
-    margin: 2%;
-    box-shadow: 2px -2px 5px 1px lightgray;
-    color: white;
-    background-color: $primaryBlue;
-    border-radius: 5px;
-  }
-  #save-item-button:hover {
-    background-color: $primaryButtonHoverColor;
-  }
-}
+//   #save-item-button {
+//     width: 5rem;
+//     min-height: 30px;
+//     margin: 2%;
+//     box-shadow: 2px -2px 5px 1px lightgray;
+//     color: white;
+//     background-color: $primaryBlue;
+//     border-radius: 5px;
+//   }
+//   #save-item-button:hover {
+//     background-color: $primaryButtonHoverColor;
+//   }
+// }
 
-// shopping list
-#list-buttons {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-  min-height: 50px;
+// // shopping list
+// #list-buttons {
+//   display: flex;
+//   justify-content: space-evenly;
+//   align-items: center;
+//   width: 100%;
+//   min-height: 50px;
 
-  input {
-    color: white;
-    background-color: $secondaryBlue;
-    border-radius: 5px;
-    height: 30px;
-    width: auto;
-    box-shadow: 2px -2px 5px 1px lightgray;
+//   input {
+//     color: white;
+//     background-color: $secondaryBlue;
+//     border-radius: 5px;
+//     height: 30px;
+//     width: auto;
+//     box-shadow: 2px -2px 5px 1px lightgray;
 
-  }
+//   }
 
-}
+// }
 
-#list-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border: 1px solid black;
-  width: 95%;
-  margin-top: 1%;
-  border-radius: 2%;
-  overflow: scroll;
-  max-height: 60vh;
+// #list-container {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   border: 1px solid black;
+//   width: 95%;
+//   margin-top: 1%;
+//   border-radius: 2%;
+//   overflow: scroll;
+//   max-height: 60vh;
 
 
-  .aisle-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+//   .aisle-container {
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
 
-    // title of each aisle
-    .aisle-title {
-      margin: 5%;
-      color: $primaryBlue;
-    }
-  }
-}
+//     // title of each aisle
+//     .aisle-title {
+//       margin: 5%;
+//       color: $primaryBlue;
+//     }
+//   }
+// }
 
-// each aisle. the ul of all the items in the aisle
-.items-list {
-  list-style-type: none;
-  margin: 0;
-  width: 70%;
+// // each aisle. the ul of all the items in the aisle
+// .items-list {
+//   list-style-type: none;
+//   margin: 0;
+//   width: 70%;
 
-  // individual items
-  li {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border-bottom: 1px solid black;
-    color: $primaryTextColor;
+//   // individual items
+//   li {
+//     display: flex;
+//     align-items: center;
+//     width: 100%;
+//     border-bottom: 1px solid black;
+//     color: $primaryTextColor;
 
-    // checkbox
-    input[type=checkbox] {
-      height: 30px;
-      width: 30px;
-      background-color: $secondaryBlue;
-      // accent-color: $secondaryBlue;
-      color: white;
-      border-radius: 5px;
-      padding: 0;
-      box-shadow: 2px -2px 5px 1px lightgray;
-    }
+//     // checkbox
+//     input[type=checkbox] {
+//       height: 30px;
+//       width: 30px;
+//       background-color: $secondaryBlue;
+//       // accent-color: $secondaryBlue;
+//       color: white;
+//       border-radius: 5px;
+//       padding: 0;
+//       box-shadow: 2px -2px 5px 1px lightgray;
+//     }
     
 
-    // Clear item
-    button {
-      height: 30px;
-      width: 30px;
-      margin-left: auto;
-      color: white;
-      background-color: $secondaryBlue;
-      border-radius: 5px;
-      padding: 0;
-      box-shadow: 2px -2px 5px 1px lightgray;
-    }
+//     // Clear item
+//     button {
+//       height: 30px;
+//       width: 30px;
+//       margin-left: auto;
+//       color: white;
+//       background-color: $secondaryBlue;
+//       border-radius: 5px;
+//       padding: 0;
+//       box-shadow: 2px -2px 5px 1px lightgray;
+//     }
 
-    button:hover {
-      background-color: $secondaryButtonHoverColor;
-    }
-  }
-}
+//     button:hover {
+//       background-color: $secondaryButtonHoverColor;
+//     }
+//   }
+// }
 
 
 // SideBar - when it's shown
-.sidebar-open {
-  width: 70%;
-  height: 100%;
-  position: fixed;
-  z-index: 1;
-  border: 1px solid black;
-  background-color: $secondaryBackgroud;
-  // transform: translateX(0%);
-  // transition: transform 3.5s ease;
+// .sidebar-open {
+//   width: 70%;
+//   height: 100%;
+//   position: fixed;
+//   z-index: 1;
+//   border: 1px solid black;
+//   background-color: $secondaryBackgroud;
+//   // transform: translateX(0%);
+//   // transition: transform 3.5s ease;
 
-  display: flex;
-  flex-direction: column;
+//   display: flex;
+//   flex-direction: column;
 
-  h1 {
-    margin: 2px;
-    font-size: 2.5rem;
-    color: $primaryBlue;
-  }
+//   h1 {
+//     margin: 2px;
+//     font-size: 2.5rem;
+//     color: $primaryBlue;
+//   }
 
-  button {
-    align-self: flex-end;
-    height: 70px;
-    width: 70px;
-    border: 1px solid black;
+//   button {
+//     align-self: flex-end;
+//     height: 70px;
+//     width: 70px;
+//     border: 1px solid black;
 
-    color: white;
-    background-color: $secondaryBlue;
-    border-radius: 5px;
+//     color: white;
+//     background-color: $secondaryBlue;
+//     border-radius: 5px;
 
-    span {
-      font-size: 20rem;
-      font-weight: 600;
-    }
-  }
-}
+//     span {
+//       font-size: 20rem;
+//       font-weight: 600;
+//     }
+//   }
+// }
 
-// sidebar when it's closed
-.sidebar-closed {
-  display: none;
-  transition: 3.5s ease;
-  // transform: translateX(-100%);
-  // transition: transform 3.5s ease;
-}
+// // sidebar when it's closed
+// .sidebar-closed {
+//   display: none;
+//   transition: 3.5s ease;
+//   // transform: translateX(-100%);
+//   // transition: transform 3.5s ease;
+// }
 
 
-// profile
-.profile-open {
-  position: absolute;
-  right: 0;
-  z-index: 1;
-  width: 30%;
-  height: 10%;
-  border: 1px solid black;
-  background-color: $secondaryBackgroud;
+// // profile
+// .profile-open {
+//   position: absolute;
+//   right: 0;
+//   z-index: 1;
+//   width: 30%;
+//   height: 10%;
+//   border: 1px solid black;
+//   background-color: $secondaryBackgroud;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
 
-  button {
-    align-self: flex-end;
-    height: 20px;
-    width: 20px;
-    border: 1px solid black;
+//   button {
+//     align-self: flex-end;
+//     height: 20px;
+//     width: 20px;
+//     border: 1px solid black;
 
-    color: white;
-    background-color: $secondaryBlue;
-    border-radius: 5px;
-  }
+//     color: white;
+//     background-color: $secondaryBlue;
+//     border-radius: 5px;
+//   }
 
-  a {
-    padding-top: 10px;
-  }
+//   a {
+//     padding-top: 10px;
+//   }
 
-}
+// }
 
-.profile-closed {
-  display: none;
-}
+// .profile-closed {
+//   display: none;
+// }
 
-// login container
-.login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: $secondaryBlue;
-  padding: 10%;
-  margin: 10%;
-  border-radius: 5%;
+// // login container
+// .login-container {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: $secondaryBlue;
+//   padding: 10%;
+//   margin: 10%;
+//   border-radius: 5%;
 
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 10%;
-  }
+//   .login-form {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     margin: 10%;
+//   }
 
-  #submit-button {
-    margin: 10%;
-    color: white;
-    background-color: $primaryBlue;
-    border-radius: 5px;
-    box-shadow: 2px -2px 5px 1px lightgray;
-  }
-  #submit-button:hover {
-    background-color: $primaryButtonHoverColor;
-  }
-}
+//   #submit-button {
+//     margin: 10%;
+//     color: white;
+//     background-color: $primaryBlue;
+//     border-radius: 5px;
+//     box-shadow: 2px -2px 5px 1px lightgray;
+//   }
+//   #submit-button:hover {
+//     background-color: $primaryButtonHoverColor;
+//   }
+// }

@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router";
 
 // Components
-import HomePage from "./HomePage";
-import Login from "./Login";
+import HomePage from "../pages/HomePage";
+import Login from "../pages/Login";
 
 const App = () => {
 

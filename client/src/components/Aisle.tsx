@@ -6,12 +6,13 @@ const Aisle = ({ aisleTitle, itemsArr, deleteItem, toggleCheck }) => {
   const [itemElems, setItemElems] = useState();
 
   useEffect(() => {
-    setItemElems(itemsArr.map(itemObj => {
+    setItemElems(itemsArr.map((itemObj, index) => {
       console.log('useEffect in ShoppingListContainer');
       return (
         <Item
           key={itemObj.id}
           id={itemObj.id}
+          index={index}
           itemName={itemObj.itemName}
           checked={itemObj.checked}
           deleteItem={deleteItem}
@@ -22,12 +23,14 @@ const Aisle = ({ aisleTitle, itemsArr, deleteItem, toggleCheck }) => {
   }, [itemsArr])
 
   return (
-    <article className="aisle-container">
-      <h4 className="aisle-title">{aisleTitle}</h4>
-      <ul className="items-list">
+    <>
+    <section className="m-2 rounded w-full">
+    <h1 className="text-primaryBlue text-2xl font-semibold mb-2">{aisleTitle}</h1>
+      <ul className="">
         {itemElems}
       </ul>
-    </article>
+    </section>
+    </>
   )
 }
 

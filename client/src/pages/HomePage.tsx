@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 
 // Components
-import Header from './Header';
-import NewItem from './NewItem';
-import ShoppingListContainer from './ShoppingListContainer'
-import SideBar from "./SideBar";
-import Profile from "./Profile";
+import Header from '../components/Header';
+import NewItem from '../components/NewItem';
+import ShoppingListContainer from '../components/ShoppingListContainer'
+import SideBar from "../components/SideBar";
+import Profile from "../components/Profile";
 
 const HomePage = () => {
 
   const [groceries, setGroceries] = useState([])
-  const [newItemToggle, setNewItemToggle] = useState(false);
-  const [sideBarClass, setSideBarClass] = useState('sidebar-closed');
-  const [profileClass, setProfileClass] = useState('profile-closed');
+
+  const [lastCategory, setLastCategory] = useState<string>('');
+  const [newItem, setNewItem] = useState<string>('');
+  
+  const [newItemToggle, setNewItemToggle] = useState<boolean>(false);
+  
+  // toggle side bar and profile
+  const [sideBarOpen, setSideBarOpen] = useState<boolean>(false);
+  const [profileOpen, setProfileOpen] = useState<boolean>(false);
 
   // get initial data on page load
   useEffect(() => {
@@ -30,6 +36,7 @@ const HomePage = () => {
     e.preventDefault();
     const inputElem = e.target.querySelector('#new-item-input');
     const newItem = inputElem.value;
+    setNewItem(newItem);
     if (newItem === '') return;
     inputElem.value = '';
     fetch('/api/addItem', {
@@ -42,7 +49,9 @@ const HomePage = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        // set last category
+        setLastCategory(data);
+        console.log('New category: ', data);
         if (data) setNewItemToggle(!newItemToggle);
       })
       .catch(err => console.log(err));
@@ -50,12 +59,13 @@ const HomePage = () => {
 
   // Ability to check an item
   const toggleCheck = (e) => {
-    // should immediately check it in the UI, but checked is a state that's part of groceries so maybe has to go through that state?? And therefore easiest way is through db??
-    // console.log(e.target.checked);
-    // e.target.checked = !e.target.checked;
+    // update state so that it's updated in the UI
+    // setGroceries(groceries.map(grocery => {
+    //   grocery.id === id ? { ...grocery, checked: !grocery.checked } : grocery
+    // } ));
 
     const id = e.target.nextSibling.id 
-    console.log(id);
+    // console.log(id);
     fetch(`/api/toggleCheck/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -93,30 +103,32 @@ const HomePage = () => {
 
   // Open the sidebar. *** Probably easier with booleans and ternary operators
   const showSideBar = () => {
-    setSideBarClass('sidebar-open');
+    setSideBarOpen(true);
   }
   // Close the sidebar
   const closeSideBar = () => {
-    setSideBarClass('sidebar-closed');
+    setSideBarOpen(false);
   }
 
   // Open the profile
   const showProfile = () => {
-    setProfileClass('profile-open');
+    setProfileOpen(true);
   }
   // Close the profile
   const closeProfile = () => {
-    setProfileClass('profile-closed');
+    setProfileOpen(false);
   }
 
   return (
     <>
-      <SideBar sideBarClass={sideBarClass} closeSideBar={closeSideBar} />
-      <Profile profileClass={profileClass} closeProfile={closeProfile} />
-      <Header showSideBar={showSideBar} showProfile={showProfile} />
+      <div className="w-full lg:w-3/4 xl:w-2/3 mx-auto">
+        <SideBar sideBarOpen={sideBarOpen} closeSideBar={closeSideBar} />
+        <Profile profileOpen={profileOpen} closeProfile={closeProfile} />
+        <Header showSideBar={showSideBar} showProfile={showProfile} />
+      </div>
 
-      <main>
-        <NewItem saveNewItem={saveNewItem} />
+      <main className=" w-full lg:w-3/4 xl:w-2/3 mx-auto ">
+        <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} setNewItem={setNewItem} />
         <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck}/>
       </main>
     </>
