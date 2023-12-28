@@ -121,13 +121,13 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="bg-secondaryBackgroud sticky top-0 z-50">
+      <div className="w-full lg:w-3/4 xl:w-2/3 mx-auto">
         <SideBar sideBarOpen={sideBarOpen} closeSideBar={closeSideBar} />
         <Profile profileOpen={profileOpen} closeProfile={closeProfile} />
         <Header showSideBar={showSideBar} showProfile={showProfile} />
       </div>
 
-      <main>
+      <main className=" w-full lg:w-3/4 xl:w-2/3 mx-auto ">
         <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} setNewItem={setNewItem} />
         <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck}/>
       </main>
