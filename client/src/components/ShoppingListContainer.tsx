@@ -48,7 +48,7 @@ const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck }) => {
             </h2>
           </label>
         </section>
-        <section className="flex flex-col items-start w-full">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {aisleElems}
         </section>
 
