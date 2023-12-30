@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router";
 import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
 import Signup from "../pages/SignUp";
+import ResetPassword from "../pages/ResetPassword";
 
 const App = () => {
 
@@ -13,6 +14,7 @@ const App = () => {
       <Route path="/" element={<HomePage/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<Signup/>}/>
+      <Route path="/resetpassword" element={<ResetPassword/>}/>
     </Routes>
   );
 };

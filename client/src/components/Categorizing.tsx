@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import arrow from '../images/arrow.svg'
 
-const Categorizing = ({ lastCategory, newItem, setNewItem }) => {
+const Categorizing = ({ lastCategory, newItem, updateNewItem, resetLastCategory }) => {
 
   const [show, setShow] = useState(false);
 
@@ -10,12 +10,15 @@ const Categorizing = ({ lastCategory, newItem, setNewItem }) => {
       setShow(true);
       if (lastCategory) {
         setTimeout(() => {
-          setNewItem('');
+          updateNewItem('');
+          resetLastCategory();
           setShow(false);
         }, 1500);
       }
     }
-  }, [newItem, lastCategory, setNewItem]);
+  }, [newItem, lastCategory]);
+
+  console.log('lastCategory: ', lastCategory);
 
   return (
     <>
@@ -26,7 +29,7 @@ const Categorizing = ({ lastCategory, newItem, setNewItem }) => {
             <img className='h-full' alt='arrow' src={arrow}></img>
           </div>}
         {newItem && !lastCategory && <div className='spinner'></div>}
-        {lastCategory && newItem && <p className='pr-4 font-semibold'>{lastCategory}</p>}
+        {lastCategory && newItem && <p className='pr-4 font-semibold'>{lastCategory.toString()}</p>}
       </section>
     </>
   )

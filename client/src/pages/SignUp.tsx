@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 type Inputs = {
   email: string
@@ -77,7 +78,7 @@ const SignUp = () => {
             </button>
           </div> */}
           <div className='flex justify-center m-4'>
-            <p className='text-slate-500'>Already have an account? <span className='text-blue-500 hover:text-blue-700 hover:cursor-pointer'>Sign In</span></p>
+            <p className='text-slate-500'>Already have an account? <Link to='/login' className='text-blue-500 hover:text-blue-700 hover:cursor-pointer'>Sign In</Link></p>
           </div>
         </form>
       </section>

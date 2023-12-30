@@ -40,7 +40,7 @@ const DeleteItem = ({deleteItem, id}) => {
         </div>
         <div className="flex items-center p-4 pl-5"
              style={{ transform: `translateX(${translateX}px)`, transition: 'transform 0.3s ease' }}>
-          <img className='w-7 h-7' src={deleteIcon}/>
+          <img className='w-7 h-7 lg:h-5' src={deleteIcon}/>
         </div>
       </div>
     );
@@ -48,8 +48,8 @@ const DeleteItem = ({deleteItem, id}) => {
 
   // If desktop, just use a button to delete
   return (
-    <button onClick={deleteItem} className="h-8 w-8 rounded flex items-center justify-center hover:bg-slate-400">
-    <img className='w-7 h-7' src={deleteIcon}/>
+    <button onClick={deleteItem} className="h-8 w-8 lg:h-5 rounded flex items-center justify-center hover:bg-slate-400">
+    <img className='w-7 h-7 lg:h-5' src={deleteIcon}/>
   </button>
   )
 }

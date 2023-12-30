@@ -39,8 +39,8 @@ const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck }) => {
           <label className="flex items-center cursor-pointer">
             <div className="relative">
               <input type="checkbox" className="hidden" checked={isToggled} onChange={handleToggle} />
-              <div className=" bg-secondaryBlue border-2 border-gray-400 h-8 w-16 rounded-full"></div>
-              <div className={`absolute left-0 top-0 bg-primaryBlue w-8 h-8 rounded-full transition transform
+              <div className=" bg-secondaryBlue border-2 border-gray-400 h-8 w-16 lg:h-4 lg:w-8 rounded-full"></div>
+              <div className={`absolute left-0 top-0 bg-primaryBlue w-8 h-8 lg:w-4 lg:h-4 rounded-full transition transform
                 ${isToggled ? 'translate-x-full' : ''}`}></div>
             </div>
             <h2 className="ml-3 text-secondaryBlue text-lg">
