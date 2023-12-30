@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import { useSwipeable } from 'react-swipeable';
 import deleteIcon from '../images/delete.svg';
 
-const DeleteItem = ({deleteItem, id}) => {
+const DeleteItemMobile = ({deleteItem, id}) => {
   console.log('innerWidth', window.innerWidth);
 
   const [swipeDistance, setSwipeDistance] = useState(0);
   const threshold = 50; // Threshold to delete
 
-  // Only use swipeable on mobile
-  if (window.innerWidth < 768) {
+  // Only use swipeable on mobile (1024 is tailwind's lg cut-off)
     const handlers = useSwipeable({
       onSwiping: (eventData) => {
         if (eventData.deltaX < 0) { // Only set swipe distance if swiping left
@@ -44,14 +43,6 @@ const DeleteItem = ({deleteItem, id}) => {
         </div>
       </div>
     );
-  }
-
-  // If desktop, just use a button to delete
-  return (
-    <button onClick={deleteItem} className="h-8 w-8 rounded flex items-center justify-center hover:bg-slate-400">
-    <img className='w-7 h-7' src={deleteIcon}/>
-  </button>
-  )
 }
 
-export default DeleteItem
+export default DeleteItemMobile

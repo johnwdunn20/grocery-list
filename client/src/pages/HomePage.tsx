@@ -31,6 +31,15 @@ const HomePage = () => {
 
   }, [newItemToggle]);
 
+  // functions to reset category set item
+  const resetLastCategory = () => {
+    setLastCategory('');
+  }
+
+  const updateNewItem = (item: string) => {
+    setNewItem(item);
+  }
+
   // Ability to save new item
   const saveNewItem = (e) => {
     e.preventDefault();
@@ -128,7 +137,7 @@ const HomePage = () => {
       </div>
 
       <main className=" w-full lg:w-3/4 xl:w-2/3 mx-auto ">
-        <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} setNewItem={setNewItem} />
+        <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} updateNewItem={updateNewItem} resetLastCategory={resetLastCategory} />
         <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck}/>
       </main>
     </>
