@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development', // I don't think I need this because setting this in pacakage.json scripts
-  entry: './client/src/index.tsx',
+  entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -20,7 +20,7 @@ module.exports = {
     // point static files to client/dist even though public path is /
     static: {
       // match the output path
-      directory: path.resolve(__dirname, 'client/dist'),
+      directory: path.resolve(__dirname, '/dist'),
       // match the output 'publicPath'
       publicPath: '/',
     },
@@ -37,14 +37,6 @@ module.exports = {
   },
   module: {
     rules: [
-      // load react
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   exclude: /node_modules/,
-      //   use: {
-      //     loader: 'babel-loader',
-      //   }
-      // },
       {
         test: /\.(ts|tsx)$/,
         use: 'ts-loader',
@@ -78,7 +70,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './client/public/index.html',
+      template: './public/index.html',
     }),
   ],
   resolve: {

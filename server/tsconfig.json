@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es6", // Set the ECMAScript target version
+    "module": "commonjs",
+    "outDir": "./dist/", // Output directory
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,          // allow JavaScript files to be compiled
+  },
+  "include": ["**/*.ts"], // Adjust this to include your server TypeScript files
+  "exclude": ["node_modules"]
+}
