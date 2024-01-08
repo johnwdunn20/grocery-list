@@ -31,16 +31,19 @@ const usersSchema = new Schema({
 
 const User = mongoose.model('user', usersSchema);
 
-// Category schema
-const categorySchema = new Schema({
-  category: {
+// Item Schema
+const itemSchema = new Schema({
+  itemName: {
     type: String,
     required: true,
-    unique: true
-  }
-});
+  },
+  checked: {
+    type: Boolean,
+    default: false
+  },
+})
 
-const Category = mongoose.model('category', categorySchema);
+const Item = mongoose.model('item', itemSchema)
 
 // Grocery schema
 const grocerySchema = new Schema({
@@ -49,54 +52,25 @@ const grocerySchema = new Schema({
     ref: User
     // **** fk
   },
-  itemName: {
+  category: {
     type: String,
-    required: true,
+    required: true
   },
-  checked: {
+  items: itemSchema,
+  isHistory: {
     type: Boolean,
     default: false
   },
-  category: {
-    type: mongoose.Types.ObjectId,
-    ref: Category
+  historyDate: {
+    type: Date,
+    default: Date.now
   }
 });
 
 const Grocery = mongoose.model('grocery', grocerySchema);
 
-
-// History schema
-const historySchema = new Schema({
-  user: {
-    type: mongoose.Types.ObjectId,
-    ref: User
-    // **** fk
-  },
-  itemName: {
-    type: String,
-    required: true,
-  },
-  checked: {
-    type: Boolean,
-    default: false
-  },
-  category: {
-    type: mongoose.Types.ObjectId,
-    ref: Category
-    // *** fk
-  },
-  createdDate: {
-    type: Date,
-    default: Date.now()
-  }
-});
-
-const History = mongoose.model('history', historySchema);
-
 export default {
   User,
-  Category,
   Grocery,
-  History,
+  Item
 };
