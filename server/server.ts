@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 
 // import controllers
 import databaseController from './controllers/database';
+import authController from './controllers/auth';
 import openAIController from './controllers/openAi';
 
 
@@ -15,10 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
-// Testing
-app.get('/', (req, res) => {
-  return res.status(200).send('Test Works!')
-});
 
 // Probably need a router that routes everything to /api
 const apiRouter = express.Router();
@@ -26,6 +23,7 @@ app.use('/api', apiRouter);
 
 // Initial Load - get all groceries
 apiRouter.get('/groceries',
+  authController.isLoggedIn,
   databaseController.getGroceries,
   (req, res) => {
   return res.status(200).json(res.locals.groceries);
@@ -34,6 +32,7 @@ apiRouter.get('/groceries',
 // Add new Item
 apiRouter.post('/addItem',
   openAIController.getCategory,
+  authController.isLoggedIn,
   databaseController.addItem,
   (req, res) => {
     console.log(req.body.newItem);
@@ -56,6 +55,30 @@ apiRouter.patch('/toggleCheck/:id',
   databaseController.toggleCheck,
   (req, res) => {
     return res.status(200).json(res.locals.updatedItem);
+  }
+);
+
+// Login
+apiRouter.post('/login',
+  authController.login,
+  (req, res) => {
+    return res.status(200).json(res.locals.id);
+  }
+);
+
+// Signup
+apiRouter.post('/signup',
+  authController.signup,
+  (req, res) => {
+    return res.status(200).json(res.locals.id);
+  }
+);
+
+// Logout
+apiRouter.post('/logout',
+  authController.logout,
+  (req, res) => {
+    return res.status(200).send('Logged out');
   }
 );
 

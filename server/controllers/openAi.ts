@@ -105,6 +105,24 @@ const openAIController = {
   getCategory: async (req, res, next) => {
     const openai = new OpenAI({ apiKey: API_KEY });
     const { newItem } = req.body;
+    // invoke global error handler if no newItem
+    if (!newItem) {
+      return next({
+        log: `Express error handler caught error in openAIController.getCategory. Error: No newItem`,
+        status: 500,
+        message: { err: 'No new item sent' },
+      });
+    }
+
+    // invoke global error handler if newItem is too long (prevent abuse of my openAI key)
+    if (newItem.length > 50) {
+      return next({
+        log: `Express error handler caught error in openAIController.getCategory. Error: newItem is too long`,
+        status: 500,
+        message: { err: 'newItem is too long' },
+      });
+    }
+
     console.log('newItem: ', newItem);
     const completion = await openai.chat.completions.create({
       messages: [
