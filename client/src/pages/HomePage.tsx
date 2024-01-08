@@ -21,14 +21,20 @@ const HomePage = () => {
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
 
   // get initial data on page load
+  const getGroceries = async () => {
+    try {
+      const response = await fetch('/api/groceries');
+      if (!response.ok) {
+        return console.log('Error fetching groceries');
+      };
+      const data = await response.json();
+      setGroceries(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   useEffect(() => {
-    fetch('/api/groceries')
-      .then(response => response.json())
-      .then(data => {
-        setGroceries(data);
-      })
-      .catch(err => console.log(err));
-
+    getGroceries();
   }, [newItemToggle]);
 
   // functions to reset category set item
