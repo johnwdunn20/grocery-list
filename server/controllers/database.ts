@@ -1,12 +1,15 @@
-import models from '../models/models';
+import models from "../models/models";
 
 const databaseController = {
-
   // Get all groceries and format them for the frontend
-  getGroceries: (req, res, next) => {
+  getGroceries: async (req, res, next) => {
     try {
-
-      res.locals.groceries = outputArrOfObjs;
+      // get the jwt from cookies?
+      const groceries = await models.Grocery.find({
+        user: req.user.id,
+        isHistory: false,
+      }); // **** Will need to be updated to find the actual user's data
+      res.locals.groceries = groceries;
       // return next();
     } catch (err) {
       return next({
@@ -17,19 +20,22 @@ const databaseController = {
     }
   },
 
+  // add a new item
   addItem: (req, res, next) => {
     const { newItem } = req.body;
 
     // get id of the category
     models.Category.findOne({
-      category: res.locals.category
+      category: res.locals.category,
     })
-      .then(data => {
+      .then((data) => {
         if (!data) {
           return next({
             log: `Not able to find category. LLM found ${res.locals.category} which does not exist as a standard category`,
             status: 500,
-            message: { err: `Not able to find category. LLM found ${res.locals.category} which does not exist as a standard category` },
+            message: {
+              err: `Not able to find category. LLM found ${res.locals.category} which does not exist as a standard category`,
+            },
           });
         }
         console.log(data.id);
@@ -37,63 +43,61 @@ const databaseController = {
 
         // use that id to insert into groceries
         models.Grocery.create({
-          user: '6542a7b6e06d8d00cdf55cb2', // **** hard-coding for now, will update it later
+          user: "6542a7b6e06d8d00cdf55cb2", // **** hard-coding for now, will update it later
           itemName: newItem,
-          category: categoryId
-        })
-          .then(data => {
-            console.log('Inserted: ', data);
-            next();
-          })
+          category: categoryId,
+        }).then((data) => {
+          console.log("Inserted: ", data);
+          next();
+        });
       })
-      .catch(err => next({
-        log: `Express error handler caught error in databaseController.getGroceries. Error: ${err}`,
-        status: 500,
-        message: { err },
-      }))
-
-
+      .catch((err) =>
+        next({
+          log: `Express error handler caught error in databaseController.getGroceries. Error: ${err}`,
+          status: 500,
+          message: { err },
+        })
+      );
   },
 
-  deleteItem: (req, res, next) => {
-    console.log('invoking deleteItem controller');
-    const id = req.params.id
+  deleteItem: async (req, res, next) => {
+    console.log("invoking deleteItem controller");
+    const id = req.params.id;
     console.log(id);
-    models.Grocery
-      .findByIdAndDelete(id)
+    models.Grocery.findByIdAndDelete(id)
       .exec()
-      .then(data => {
-        console.log('Deleted: ', data);
+      .then((data) => {
+        console.log("Deleted: ", data);
         res.locals.deletedItem = data;
         return next();
       })
-      .catch(err => next({
-        log: `Express error handler caught error in databaseController.deleteItem. Error: ${err}`,
-        status: 500,
-        message: { err },
-      }))
+      .catch((err) =>
+        next({
+          log: `Express error handler caught error in databaseController.deleteItem. Error: ${err}`,
+          status: 500,
+          message: { err },
+        })
+      );
   },
 
-  toggleCheck: (req, res, next) => {
-    console.log('invoking toggleItem controller');
-    const id = req.params.id;
-    const { checked } = req.body;
-    console.log(id);
-    models.Grocery
-      .findByIdAndUpdate(id, { checked: checked })
-      .exec()
-      .then(data => {
-        console.log('Updated', data);
-        res.locals.updatedItem = data;
-        return next();
-      })
-      .catch(err => next({
+  toggleCheck: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const { checked } = req.body;
+      const data = await models.Grocery.findByIdAndUpdate(id, {
+        checked: checked,
+      }).exec();
+      console.log("Updated", data);
+      res.locals.updatedItem = data;
+      return next();
+    } catch (err) {
+      return next({
         log: `Express error handler caught error in databaseController.toggleCheck. Error: ${err}`,
         status: 500,
         message: { err },
-      }))
-  }
-
+      });
+    }
+  },
 };
 
 export default databaseController;
