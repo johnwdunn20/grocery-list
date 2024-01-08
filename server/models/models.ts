@@ -55,7 +55,7 @@ const grocerySchema = new Schema({
     type: String,
     required: true
   },
-  items: itemSchema,
+  items: [itemSchema],
   isHistory: {
     type: Boolean,
     default: false
