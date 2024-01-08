@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es6", // Set the ECMAScript target version
+    "target": "es5", // Set the ECMAScript target version
+    "noImplicitAny": false,    // raise error on expressions and declarations with an implied 'any' type
     "module": "commonjs",
     "outDir": "./dist/", // Output directory
     "strict": true,
