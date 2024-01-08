@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 import 'dotenv/config'
 const MONGO_DB_URI = process.env.MONGO_DB_URI || '';
 
-
+console.log('process.env: ', process.env);
+console.log('mongo uri: ', MONGO_DB_URI);
 mongoose.connect(MONGO_DB_URI, {
   // useNewUrlParser: true,
   // useUnifiedTopology: true,
@@ -10,7 +11,7 @@ mongoose.connect(MONGO_DB_URI, {
   // authSource - set to my login and pw if I have connection issues
 });
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema; 
 
 // Users schema
 const usersSchema = new Schema({
