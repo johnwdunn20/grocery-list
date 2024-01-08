@@ -1,0 +1,26 @@
+{
+  "name": "grocery-list",
+  "version": "1.0.0",
+  "description": "Automatically sort groceries by aisle",
+  "scripts": {
+    "dev": "npm-run-all --parallel dev-server dev-client",
+    "dev-server": "cd server && npm run dev",
+    "dev-client": "cd client && npm run dev",
+    "install-all": "npm-run-all --parallel install-server install-client",
+    "install-server": "cd server && npm i",
+    "install-client": "cd client && npm i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnwdunn20/grocery-list.git"
+  },
+  "author": "John Dunn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnwdunn20/grocery-list/issues"
+  },
+  "homepage": "https://github.com/johnwdunn20/grocery-list#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

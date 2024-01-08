@@ -1,8 +1,7 @@
 {
   "scripts": {
     "build": "webpack --mode production --config webpack.config.js",
-    "dev": "webpack serve --mode development --config webpack.config.js",
-    "server": "nodemon server/server.js"
+    "dev": "webpack serve --mode development --config webpack.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.23.6",
