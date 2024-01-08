@@ -1,4 +1,4 @@
-const OpenAI = require("openai");
+import OpenAI from "openai";
 
 const openAIController = {};
 // this brings in env to add to the environment variables
@@ -123,4 +123,4 @@ openAIController.getCategory = async (req, res, next) => {
 
 // openAIController.getCategory({body: {newItem: 'chicken'}});
 
-module.exports = openAIController;
+export default openAIController;

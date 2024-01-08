@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./client/dist/",    // path to output directory
+    "outDir": "./dist/",    // path to output directory
     "sourceMap": true,        // generate sourcemaps for better debugging
     "noImplicitAny": false,    // raise error on expressions and declarations with an implied 'any' type
     "module": "commonjs",     // specify module code generation
@@ -13,10 +13,9 @@
     "strictFunctionTypes": false, // change later
   },
   "include": [
-    "client/src/**/*",             // path to your source files
-    "server/**/*"
+    "./src/**/*"             // path to your source files
   ],
   "exclude": [
-    "node_modules",          // exclude the node_modules directory
+    "node_modules",         // exclude the node_modules directory
   ]
 }

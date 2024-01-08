@@ -1,10 +1,10 @@
-const path = require('path');
-const express = require('express');
-const cookieParser = require('cookie-parser')
+import path from 'path';
+import express from 'express';
+import cookieParser from 'cookie-parser';
 
 // import controllers
-const databaseController = require('./controllers/database');
-const openAIController = require('./controllers/openAi');
+import databaseController from './controllers/database';
+import openAIController from './controllers/openAi';
 
 
 const PORT = 3000;

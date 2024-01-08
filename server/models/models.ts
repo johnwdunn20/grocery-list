@@ -1,10 +1,11 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
-const MONGO_DB_URI = process.env.MONGO_DB_URI;
+import mongoose from 'mongoose';
+import 'dotenv/config'
+const MONGO_DB_URI = process.env.MONGO_DB_URI || '';
+
 
 mongoose.connect(MONGO_DB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true,
   dbName: 'shopping_data'
   // authSource - set to my login and pw if I have connection issues
 });
@@ -93,9 +94,9 @@ const historySchema = new Schema({
 
 const History = mongoose.model('history', historySchema);
 
-module.exports = {
+export default {
   User,
   Category,
   Grocery,
   History,
-}
+};
