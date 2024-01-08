@@ -1,25 +1,23 @@
-// import models  from '../models/models.js';
-import 'dotenv/config'
+// Copying all of models.ts here
+import models from "../models/models";
 
-const MONGO_DB_URI = process.env.MONGO_DB_URI || '';
 
-console.log('process.env: ', process.env);
-console.log('mongo uri: ', MONGO_DB_URI);
+// ******** Command to run: npx ts-node --transpile-only  scripts/sampleData.ts ********
 
 // insert user data
 const users = [
   {
-    username: 'test',
+    name: 'test',
     password: 'test12345!',
     email: 'test@gmail.com',
   },
   {
-    username: 'john',
+    name: 'john',
     password: 'john12345!',
     email: 'john@gmail.com',
   },
   {
-    username: 'Elisabeth',
+    name: 'Elisabeth',
     password: 'Elisabeth12345!',
     email: 'elisabeth@gmail.com',
   },
@@ -35,9 +33,9 @@ const createUser = async (user) => {
 }
 
 // comment out once users are created
-// for (const user of users) {
-//   createUser(user);
-// }
+for (const user of users) {
+  createUser(user);
+}
 
 // insert category data for each user
 // when I do this in the db controller, I need to ensure that I first check if the category already exists and has isHistory false. If it does, then I insert. If not, then I create the category with isHistory false and then insert the item
