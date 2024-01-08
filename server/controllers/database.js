@@ -1,4 +1,4 @@
-const models = require('../models/models.js');
+import models from '../models/models';
 
 const databaseController = {};
 
@@ -128,4 +128,4 @@ databaseController.toggleCheck = (req, res, next) => {
     }))
 }
 
-module.exports = databaseController;
+export default databaseController;

@@ -123,4 +123,4 @@ openAIController.getCategory = async (req, res, next) => {
 
 // openAIController.getCategory({body: {newItem: 'chicken'}});
 
-module.exports = openAIController;
+export default openAIController;
