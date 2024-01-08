@@ -8,7 +8,9 @@
     "dev-client": "cd client && npm run dev",
     "install-all": "npm-run-all --parallel install-server install-client",
     "install-server": "cd server && npm i",
-    "install-client": "cd client && npm i"
+    "install-client": "cd client && npm i",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,15 @@
   },
   "homepage": "https://github.com/johnwdunn20/grocery-list#readme",
   "devDependencies": {
-    "npm-run-all": "^4.1.5"
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
+    "@typescript-eslint/parser": "^6.18.0",
+    "eslint": "^8.56.0",
+    "eslint-config-standard-with-typescript": "^43.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.33.2",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.3.3"
   }
 }
