@@ -12,7 +12,7 @@ const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck }) => {
   }
 
   useEffect(() => {
-    setAisleElems(groceries.map(aisleNameAndItems => {
+    setAisleElems( groceries.map(aisleNameAndItems => {
       // console.log('useEffect in ShoppingListContainer');
       return (
         <Aisle

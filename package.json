@@ -6,7 +6,7 @@
     "dev": "npm-run-all --parallel dev-server dev-client",
     "dev-server": "cd server && npm run dev",
     "dev-client": "cd client && npm run dev",
-    "install-all": "npm-run-all --parallel install-server install-client",
+    "install-all": "npm i && npm-run-all --parallel install-server install-client",
     "install-server": "cd server && npm i",
     "install-client": "cd client && npm i",
     "lint": "eslint . --ext .ts",

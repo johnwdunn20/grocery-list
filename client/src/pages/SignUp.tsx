@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 type Inputs = {
   email: string
   password: string
+  name: string
 }
 
 const SignUp = () => {
@@ -19,6 +20,7 @@ const SignUp = () => {
   } = useForm<Inputs>({
     defaultValues: {
       email: '',
+      name: '',
       password: ''
     }
   })
@@ -41,6 +43,15 @@ const SignUp = () => {
       <section className='flex flex-col justify-center items-center w-full md:w-3/4 lg:w-1/2 xl:w-1/3 2xl:w-1/4 max-w-screen-sm mx-auto border-1 border-slate-400 rounded-xl bg-background shadow-xl p-5'>
         <h1 className='text-2xl font-semibold mb-5 text-slate-700'>Sign Up</h1>
         <form className='w-full' onSubmit={handleSubmit(onSubmit)}>
+        <div className='flex flex-col border-2 m-2 p-2'>
+            <input className='h-8 w-full' placeholder="Name" {...register("name",
+            {
+              required: true
+            }
+            )} />
+            {errors.name && <span className='text-red-500 text-xs'>{errors.name.message}</span>}
+          </div>
+  
           <div className='flex flex-col border-2 m-2 p-2'>
             <input className='h-8 w-full' placeholder="Email" {...register("email",
             {

@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-const openAIController = {};
+
 // this brings in env to add to the environment variables
 require('dotenv').config();
 const API_KEY = process.env.OPENAI_API_KEY;
@@ -101,25 +101,45 @@ Frozen vegetables
 #Other
 `;
 
-openAIController.getCategory = async (req, res, next) => {
-  const openai = new OpenAI({ apiKey: API_KEY });
-  const { newItem } = req.body;
-  console.log('newItem: ', newItem);
-  const completion = await openai.chat.completions.create({
-    messages: [
-      { role: "system", content: systemPrompt },
-      { role: "user", content: newItem }
-    ],
-    model: "gpt-3.5-turbo",
-  });
+const openAIController = {
+  getCategory: async (req, res, next) => {
+    const openai = new OpenAI({ apiKey: API_KEY });
+    const { newItem } = req.body;
+    // invoke global error handler if no newItem
+    if (!newItem) {
+      return next({
+        log: `Express error handler caught error in openAIController.getCategory. Error: No newItem`,
+        status: 500,
+        message: { err: 'No new item sent' },
+      });
+    }
 
-  console.log(completion);
-  console.log(completion.choices[0]);
-  console.log(completion.choices[0].message.content);
-  res.locals.category = completion.choices[0].message.content;
-  // **** Need to handle for errors. check the status I get back
-  next();
-}
+    // invoke global error handler if newItem is too long (prevent abuse of my openAI key)
+    if (newItem.length > 50) {
+      return next({
+        log: `Express error handler caught error in openAIController.getCategory. Error: newItem is too long`,
+        status: 500,
+        message: { err: 'newItem is too long' },
+      });
+    }
+
+    // console.log('newItem: ', newItem);
+    const completion = await openai.chat.completions.create({
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: newItem }
+      ],
+      model: "gpt-3.5-turbo",
+    });
+  
+    // console.log(completion);
+    // console.log(completion.choices[0]);
+    // console.log(completion.choices[0].message.content);
+    res.locals.category = completion.choices[0].message.content;
+    // **** Need to handle for errors. check the status I get back
+    next();
+  }
+};
 
 // openAIController.getCategory({body: {newItem: 'chicken'}});
 
