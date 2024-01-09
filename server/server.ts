@@ -15,10 +15,10 @@ const app: Express = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
-// app.use(cors({
-//   // origin: 'http://localhost:8080', // ** probably need to update this
-//   // credentials: true,
-// }));
+app.use(cors({
+  origin: 'http://localhost:8080', // ** probably need to update this
+  credentials: true,
+}));
 
 // Router so all requests go to /api
 const apiRouter = express.Router();

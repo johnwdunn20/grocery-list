@@ -24,6 +24,7 @@ const HomePage = () => {
   const getGroceries = async () => {
     try {
       const response = await fetch('/api/groceries');
+      
       if (!response.ok) {
         return console.log('Error fetching groceries');
       };
