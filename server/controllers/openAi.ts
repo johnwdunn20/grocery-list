@@ -123,7 +123,7 @@ const openAIController = {
       });
     }
 
-    console.log('newItem: ', newItem);
+    // console.log('newItem: ', newItem);
     const completion = await openai.chat.completions.create({
       messages: [
         { role: "system", content: systemPrompt },
@@ -132,9 +132,9 @@ const openAIController = {
       model: "gpt-3.5-turbo",
     });
   
-    console.log(completion);
-    console.log(completion.choices[0]);
-    console.log(completion.choices[0].message.content);
+    // console.log(completion);
+    // console.log(completion.choices[0]);
+    // console.log(completion.choices[0].message.content);
     res.locals.category = completion.choices[0].message.content;
     // **** Need to handle for errors. check the status I get back
     next();
