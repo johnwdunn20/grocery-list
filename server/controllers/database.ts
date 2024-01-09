@@ -161,6 +161,74 @@ const databaseController = {
       });
     }
   },
+
+  clearFound: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId = res.locals.id;
+      if (!userId) {
+        return next({
+          log: `Missing user id`,
+          status: 400,
+          message: { err: `Missing user id` },
+        });
+      }
+      // *** this logic needs to be updated if I want to keep history
+      // get all the items for that user where isHistory=false
+      const groceries = await models.Grocery.find({
+        user: userId,
+        isHistory: false,
+      });
+      // iterate through the items and delete the ones that are checked
+      groceries.forEach(async (grocery) => {
+        grocery.items.forEach(async (item) => {
+          if (item.checked) {
+            await models.Item.findOneAndDelete({ _id: item._id }).exec();
+          }
+        });
+      });
+      // save the items
+      groceries.forEach(async (grocery) => {
+        await grocery.save();
+      });
+
+      return next();
+
+    } catch (err) {
+      return next({
+        log: `Express error handler caught error in databaseController.clearFound. Error: ${err}`,
+        status: 500,
+        message: { err },
+      });
+    }
+  },
+
+  clearAll: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId = res.locals.id;
+      if (!userId) {
+        return next({
+          log: `Missing user id`,
+          status: 400,
+          message: { err: `Missing user id` },
+        });
+      }
+      
+      const updated_groceries = await models.Grocery.updateMany({
+        user: userId,
+        isHistory: false,
+      }, {
+        isHistory: true,
+      }).exec();
+
+      return next();
+    } catch (err) {
+      return next({
+        log: `Express error handler caught error in databaseController.clearAll. Error: ${err}`,
+        status: 500,
+        message: { err },
+      });
+    }
+  }
 };
 
 export default databaseController;

@@ -63,6 +63,24 @@ apiRouter.patch('/toggleCheck/:id',
   }
 );
 
+// Clear Found Items
+apiRouter.post('/clearFound',
+  authController.isLoggedIn,
+  databaseController.clearFound,
+  (req: Request, res: Response) => {
+    return res.sendStatus(200);
+  }
+);
+
+// Clear All Items
+apiRouter.post('/clearAll',
+  authController.isLoggedIn,
+  databaseController.clearAll,
+  (req: Request, res: Response) => {
+    return res.sendStatus(200);
+  }
+);
+
 // Login
 apiRouter.post('/login',
   authController.login,
