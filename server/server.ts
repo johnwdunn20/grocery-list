@@ -20,7 +20,7 @@ app.use(cookieParser());
 //   // credentials: true,
 // }));
 
-// Probably need a router that routes everything to /api
+// Router so all requests go to /api
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
 
@@ -34,8 +34,8 @@ apiRouter.get('/groceries',
 
 // Add new Item
 apiRouter.post('/addItem',
-  openAIController.getCategory,
   authController.isLoggedIn,
+  openAIController.getCategory,
   databaseController.addItem,
   (req: Request, res: Response) => {
     console.log(req.body.newItem);
@@ -56,6 +56,7 @@ apiRouter.delete('/deleteItem/:id',
 
 // Toggle Checbox
 apiRouter.patch('/toggleCheck/:id',
+  authController.isLoggedIn,
   databaseController.toggleCheck,
   (req: Request, res: Response) => {
     return res.status(200).json(res.locals.updatedItem);

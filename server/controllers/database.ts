@@ -124,14 +124,34 @@ const databaseController = {
 
   toggleCheck: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const id = req.params.id;
+      const idToToggle = req.params.id;
       const { checked } = req.body;
-      const data = await models.Item.findByIdAndUpdate(id, {
+      const userId = res.locals.id;
+      if (!idToToggle) {
+        return next({
+          log: `Missing id of item to delete`,
+          status: 400,
+          message: { err: `Missing id of item to delete` },
+        });
+      }
+      if (!userId) {
+        return next({
+          log: `Missing user id`,
+          status: 400,
+          message: { err: `Missing user id` },
+        });
+      }
+      const updatedItem = await models.Item.findOneAndUpdate({
+        user: userId,
+        _id: idToToggle,
+      }, {
         checked: checked,
+      },{
+        returnDocument: 'after'
       }).exec();
 
-      console.log("Updated", data);
-      res.locals.updatedItem = data;
+      console.log("Updated", updatedItem);
+      res.locals.updatedItem = updatedItem;
       return next();
     } catch (err) {
       return next({
