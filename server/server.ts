@@ -44,7 +44,7 @@ apiRouter.post('/addItem',
 );
 
 // Delete item
-apiRouter.delete('/deleteItem/:id',
+apiRouter.delete('/deleteItem/',
   authController.isLoggedIn,
   databaseController.deleteItem,
   (req: Request, res: Response) => {

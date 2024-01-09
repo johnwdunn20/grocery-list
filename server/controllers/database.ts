@@ -81,13 +81,20 @@ const databaseController = {
 
   deleteItem: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const idToDelete = req.params.id;
+      const {id, categoryId} = req.body;
       const userId = res.locals.id;
-      if (!idToDelete) {
+      if (!id) {
         return next({
           log: `Missing id of item to delete`,
           status: 400,
           message: { err: `Missing id of item to delete` },
+        });
+      }
+      if (!categoryId) {
+        return next({
+          log: `Missing categoryId`,
+          status: 400,
+          message: { err: `Missing categoryId` },
         });
       }
       if (!userId) {
@@ -97,14 +104,27 @@ const databaseController = {
           message: { err: `Missing user id` },
         });
       }
-      console.log("idToDelete: ", idToDelete);
-      console.log("userId: ", userId);
+      // console.log("idToDelete: ", id);
+      // console.log("userId: ", userId);
+      // delete the item
       const deletedItem = await models.Item.findOneAndDelete({
         user: userId,
-        _id: idToDelete
+        _id: id
       }).exec();
-      // console.log("Deleted: ", deletedItem);
-      if (!deletedItem) {
+      
+      // delete item from grocery list
+      const updated_grocery = await models.Grocery.findOneAndUpdate({
+        user: userId,
+        _id: categoryId
+      }, {
+        $pull: { items: { _id: id } }
+      }, {
+        returnDocument: 'after'
+      }).exec();
+
+      // console.log("Updated grocery: ", updated_grocery);
+
+      if (!deletedItem || !updated_grocery) {
         return next({
           log: `Item not found`,
           status: 400,
@@ -152,9 +172,9 @@ const databaseController = {
       }).exec();
 
       // update the item in the grocery list
-      // find the grocery list
+      
 
-      console.log("Updated", updatedItem);
+      // console.log("Updated", updatedItem);
       res.locals.updatedItem = updatedItem;
       return next();
     } catch (err) {
