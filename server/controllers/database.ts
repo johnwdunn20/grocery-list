@@ -25,7 +25,6 @@ const databaseController = {
       const { newItem } = req.body;
       const category = res.locals.category;
       const userId = res.locals.id;
-      console.log('userId: ', userId);
       if (!newItem) {
         return next({
           log: `Missing newItem`,
@@ -42,33 +41,29 @@ const databaseController = {
       }
       // create the new item
       const item_data = await models.Item.create({
+        user: userId,
         itemName: newItem
       })
-      console.log('Item created: ', item_data);
       // find the category
       const cat_data = await models.Grocery.findOne({
         category: category,
         user: userId,
         isHistory: false
       })
-      console.log('Category found: ', cat_data);
       // if category doesn't exist
       if (!cat_data) {
-        console.log('Category does not exist');
         const newCat_data = await models.Grocery.create({
           user: userId,
           category: category,
           items: [item_data],
         });
 
-        console.log('New category created: ', newCat_data);
       } else { // if category does exist
         // add new item
         cat_data.items.push(item_data)
     
         // save new item
         await cat_data.save()
-        console.log('Item added to category');
 
         return next();
     }

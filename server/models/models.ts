@@ -32,6 +32,11 @@ const User = mongoose.model('user', usersSchema);
 
 // Item Schema
 const itemSchema = new Schema({
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: User
+    // **** fk
+  },
   itemName: {
     type: String,
     required: true,
