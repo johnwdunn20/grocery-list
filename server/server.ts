@@ -1,7 +1,7 @@
 import path from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
-
+import cors from 'cors';
 // import controllers
 import databaseController from './controllers/database';
 import authController from './controllers/auth';
@@ -15,7 +15,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
-
+// app.use(cors({
+//   // origin: 'http://localhost:8080', // ** probably need to update this
+//   // credentials: true,
+// }));
 
 // Probably need a router that routes everything to /api
 const apiRouter = express.Router();
