@@ -1,8 +1,9 @@
 import models from "../models/models";
+import { Request, Response, NextFunction } from "express";
 
 const databaseController = {
   // Get all groceries and format them for the frontend
-  getGroceries: async (req, res, next) => {
+  getGroceries: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId = res.locals.id;
 
@@ -21,7 +22,7 @@ const databaseController = {
     }
   },
 
-  addItem: async (req, res, next) => {
+  addItem: async (req: Request, res: Response, next: NextFunction) => {
     try {
       // console.log('add item invoked');
       const { newItem } = req.body;
@@ -78,12 +79,39 @@ const databaseController = {
     }
   },
 
-  deleteItem: async (req, res, next) => {
+  deleteItem: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const id = req.params.id;
-      const data = await models.Item.findByIdAndDelete(id).exec();
-      console.log("Deleted: ", data);
-      res.locals.deletedItem = data;
+      const idToDelete = req.params.id;
+      const userId = res.locals.id;
+      if (!idToDelete) {
+        return next({
+          log: `Missing id of item to delete`,
+          status: 400,
+          message: { err: `Missing id of item to delete` },
+        });
+      }
+      if (!userId) {
+        return next({
+          log: `Missing user id`,
+          status: 400,
+          message: { err: `Missing user id` },
+        });
+      }
+      console.log("idToDelete: ", idToDelete);
+      console.log("userId: ", userId);
+      const deletedItem = await models.Item.findOneAndDelete({
+        user: userId,
+        _id: idToDelete
+      }).exec();
+      // console.log("Deleted: ", deletedItem);
+      if (!deletedItem) {
+        return next({
+          log: `Item not found`,
+          status: 400,
+          message: { err: `Item not found` },
+        });
+      }
+      res.locals.deletedItem = deletedItem;
       return next();
     } catch (err) {
       return next({
@@ -94,7 +122,7 @@ const databaseController = {
     }
   },
 
-  toggleCheck: async (req, res, next) => {
+  toggleCheck: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id = req.params.id;
       const { checked } = req.body;

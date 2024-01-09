@@ -3,11 +3,9 @@ import 'dotenv/config'
 const MONGO_DB_URI = process.env.MONGO_DB_URI || '';
 
 mongoose.connect(MONGO_DB_URI, {
-  // useNewUrlParser: true,
-  // useUnifiedTopology: true,
   dbName: 'groceries'
   // authSource - set to my login and pw if I have connection issues
-});
+}).catch((err) => console.log('Error connecting to mongo: ', err));
 
 const Schema = mongoose.Schema; 
 

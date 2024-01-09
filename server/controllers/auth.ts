@@ -169,7 +169,6 @@ const authController = {
       }
       // set userId on res.locals
       res.locals.id = user.id;
-      console.log('isLoggedIn: ', res.locals.id);
       return next();
     } catch (err) {
       return next({
