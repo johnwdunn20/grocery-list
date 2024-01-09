@@ -45,14 +45,14 @@ const databaseController = {
       // create the new item
       const item_data = await models.Item.create({
         user: userId,
-        itemName: newItem
-      })
+        itemName: newItem,
+      });
       // find the category
       const cat_data = await models.Grocery.findOne({
         category: category,
         user: userId,
-        isHistory: false
-      })
+        isHistory: false,
+      });
       // if category doesn't exist
       if (!cat_data) {
         const newCat_data = await models.Grocery.create({
@@ -60,16 +60,16 @@ const databaseController = {
           category: category,
           items: [item_data],
         });
-
-      } else { // if category does exist
+      } else {
+        // if category does exist
         // add new item to the array
-        cat_data.items.push(item_data)
-    
-        // save new item
-        await cat_data.save()
+        cat_data.items.push(item_data);
 
-        return next();
-    }
+        // save new item
+        await cat_data.save();
+      }
+      // return next
+      return next();
     } catch (err) {
       return next({
         log: `Express error handler caught error in databaseController.addItem. Error: ${err}`,
@@ -81,7 +81,7 @@ const databaseController = {
 
   deleteItem: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const {id, categoryId} = req.body;
+      const { id, categoryId } = req.body;
       const userId = res.locals.id;
       if (!id) {
         return next({
@@ -109,18 +109,22 @@ const databaseController = {
       // delete the item
       const deletedItem = await models.Item.findOneAndDelete({
         user: userId,
-        _id: id
+        _id: id,
       }).exec();
-      
+
       // delete item from grocery list
-      const updated_grocery = await models.Grocery.findOneAndUpdate({
-        user: userId,
-        _id: categoryId
-      }, {
-        $pull: { items: { _id: id } }
-      }, {
-        returnDocument: 'after'
-      }).exec();
+      const updated_grocery = await models.Grocery.findOneAndUpdate(
+        {
+          user: userId,
+          _id: categoryId,
+        },
+        {
+          $pull: { items: { _id: id } },
+        },
+        {
+          returnDocument: "after",
+        }
+      ).exec();
 
       // console.log("Updated grocery: ", updated_grocery);
 
@@ -144,14 +148,20 @@ const databaseController = {
 
   toggleCheck: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const idToToggle = req.params.id;
-      const { checked } = req.body;
+      const { id, categoryId, checked } = req.body;
       const userId = res.locals.id;
-      if (!idToToggle) {
+      if (!id) {
         return next({
           log: `Missing id of item to delete`,
           status: 400,
           message: { err: `Missing id of item to delete` },
+        });
+      }
+      if (!categoryId) {
+        return next({
+          log: `Missing categoryId`,
+          status: 400,
+          message: { err: `Missing categoryId` },
         });
       }
       if (!userId) {
@@ -162,17 +172,33 @@ const databaseController = {
         });
       }
       // update the item
-      const updatedItem = await models.Item.findOneAndUpdate({
-        user: userId,
-        _id: idToToggle,
-      }, {
-        checked: checked,
-      },{
-        returnDocument: 'after'
-      }).exec();
+      const updatedItem = await models.Item.findOneAndUpdate(
+        {
+          user: userId,
+          _id: id,
+        },
+        {
+          checked: checked,
+        },
+        {
+          returnDocument: "after",
+        }
+      ).exec();
 
       // update the item in the grocery list
-      
+      const updated_grocery = await models.Grocery.findOneAndUpdate(
+        {
+          user: userId,
+          _id: categoryId,
+          "items._id": id,
+        },
+        {
+          $set: { "items.$.checked": checked },
+        },
+        {
+          returnDocument: "after",
+        }
+      ).exec();
 
       // console.log("Updated", updatedItem);
       res.locals.updatedItem = updatedItem;
@@ -216,7 +242,6 @@ const databaseController = {
       });
 
       return next();
-
     } catch (err) {
       return next({
         log: `Express error handler caught error in databaseController.clearFound. Error: ${err}`,
@@ -236,13 +261,16 @@ const databaseController = {
           message: { err: `Missing user id` },
         });
       }
-      
-      const updated_groceries = await models.Grocery.updateMany({
-        user: userId,
-        isHistory: false,
-      }, {
-        isHistory: true,
-      }).exec();
+
+      const updated_groceries = await models.Grocery.updateMany(
+        {
+          user: userId,
+          isHistory: false,
+        },
+        {
+          isHistory: true,
+        }
+      ).exec();
 
       return next();
     } catch (err) {
@@ -252,7 +280,7 @@ const databaseController = {
         message: { err },
       });
     }
-  }
+  },
 };
 
 export default databaseController;

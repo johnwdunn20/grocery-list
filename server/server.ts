@@ -44,7 +44,7 @@ apiRouter.post('/addItem',
 );
 
 // Delete item
-apiRouter.delete('/deleteItem/',
+apiRouter.delete('/deleteItem',
   authController.isLoggedIn,
   databaseController.deleteItem,
   (req: Request, res: Response) => {
@@ -55,7 +55,7 @@ apiRouter.delete('/deleteItem/',
 );
 
 // Toggle Checbox
-apiRouter.patch('/toggleCheck/:id',
+apiRouter.patch('/toggleCheck',
   authController.isLoggedIn,
   databaseController.toggleCheck,
   (req: Request, res: Response) => {
