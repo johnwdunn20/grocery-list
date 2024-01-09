@@ -10,8 +10,8 @@ const Aisle = ({ aisleTitle, itemsArr, deleteItem, toggleCheck }) => {
       console.log('useEffect in ShoppingListContainer');
       return (
         <Item
-          key={itemObj.id}
-          id={itemObj.id}
+          key={itemObj._id}
+          id={itemObj._id}
           index={index}
           itemName={itemObj.itemName}
           checked={itemObj.checked}
