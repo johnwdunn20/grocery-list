@@ -75,18 +75,31 @@ const HomePage = () => {
   }
 
   // Ability to check an item
-  const toggleCheck = (e) => {
-    // update state so that it's updated in the UI
-    // setGroceries(groceries.map(grocery => {
-    //   grocery.id === id ? { ...grocery, checked: !grocery.checked } : grocery
-    // } ));
+  const toggleCheck = (id: string, categoryId: string, checked: boolean) => {
+    // update groceries state
+    const updatedGroceries = groceries.map(grocery => {
+      if (grocery._id === categoryId) {
+        const updatedItems = grocery.items.map(item => {
+          if (item._id === id) {
+            console.log('Item to update: ', item);
+            console.log('Updated item: ', { ...item, checked });
+            return { ...item, checked };
+          } else {
+            return item;
+          }
+        });
+        return { ...grocery, items: updatedItems };
+      } else {
+        return grocery;
+      }
+    });
+    setGroceries(updatedGroceries);
 
-    const id = e.target.nextSibling.id 
-    // console.log(id);
-    fetch(`/api/toggleCheck/${id}`, {
+    // update in db
+    fetch(`/api/toggleCheck/`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ checked: e.target.checked }) // send the new checked value
+      body: JSON.stringify({ id, categoryId, checked })
     })
       .then(response => response.json())
       .then(data => {
@@ -94,7 +107,6 @@ const HomePage = () => {
         if (data) setNewItemToggle(!newItemToggle);
       })
       .catch(err => console.log(err))
-
   }
 
   // Delete an item
