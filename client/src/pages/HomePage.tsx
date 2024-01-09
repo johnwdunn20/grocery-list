@@ -121,7 +121,10 @@ const HomePage = () => {
         return grocery;
       }
     });
-    setGroceries(updatedGroceries);
+    // if no items left in category, remove category
+    const updatedGroceries2 = updatedGroceries.filter(grocery => grocery.items.length > 0);
+
+    setGroceries(updatedGroceries2);
 
     // update the database
     console.log('Sending request to delete: ', id);
