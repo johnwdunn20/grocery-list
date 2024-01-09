@@ -10,6 +10,7 @@ type Inputs = {
 
 const Login = () => {
   const navigate = useNavigate();
+  const [incorrectLoginInfo, setIncorrectLoginInfo] = React.useState<boolean>(false);
 
   const {
     register,
@@ -22,15 +23,28 @@ const Login = () => {
       password: ''
     }
   })
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data)
-    // navigate('/');
-    // navigate needs to happen after verifying authentication
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+      credentials: 'include'
+    })
+    if (response.ok) {
+      navigate('/');
+    } else {
+      // show user that login failed
+      setIncorrectLoginInfo(true);
+      console.log('Login failed')
+    }
   }
 
-  console.log('Errors: ', errors);
-  console.log(watch("email"));
-  console.log(watch("password"));
+  // console.log('Errors: ', errors);
+  // console.log(watch("email"));
+  // console.log(watch("password"));
 
   return (
     <main className='h-screen flex flex-col justify-center items-center bg-primaryBlue'>
@@ -68,6 +82,7 @@ const Login = () => {
             {errors.password && <span className='text-red-500 text-xs'>{errors.password.message}</span>}
           </div>
           <div className='self-start m-2'>
+          {incorrectLoginInfo && <div className='text-red-500'>Incorrect email or password</div>}
             <Link to='/resetpassword' className='text-blue-500 hover:text-blue-700 hover:cursor-pointer'>Forgot Password?</Link>
           </div>
   

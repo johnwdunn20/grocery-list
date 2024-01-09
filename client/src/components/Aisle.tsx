@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Item from './Item'
 
-const Aisle = ({ aisleTitle, itemsArr, deleteItem, toggleCheck }) => {
+const Aisle = ({ aisleTitle, itemsArr, deleteItem, toggleCheck, categoryId }) => {
 
   const [itemElems, setItemElems] = useState();
 
@@ -10,13 +10,14 @@ const Aisle = ({ aisleTitle, itemsArr, deleteItem, toggleCheck }) => {
       console.log('useEffect in ShoppingListContainer');
       return (
         <Item
-          key={itemObj.id}
-          id={itemObj.id}
+          key={itemObj._id}
+          id={itemObj._id}
           index={index}
           itemName={itemObj.itemName}
           checked={itemObj.checked}
           deleteItem={deleteItem}
           toggleCheck={toggleCheck}
+          categoryId={categoryId}
         />
       );
     }))

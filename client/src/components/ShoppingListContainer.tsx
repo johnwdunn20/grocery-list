@@ -21,6 +21,7 @@ const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck }) => {
           itemsArr={aisleNameAndItems.items}
           deleteItem={deleteItem}
           toggleCheck={toggleCheck}
+          categoryId={aisleNameAndItems._id}
         />
       );
     }))
