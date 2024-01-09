@@ -62,7 +62,7 @@ const databaseController = {
         });
 
       } else { // if category does exist
-        // add new item
+        // add new item to the array
         cat_data.items.push(item_data)
     
         // save new item
@@ -141,6 +141,7 @@ const databaseController = {
           message: { err: `Missing user id` },
         });
       }
+      // update the item
       const updatedItem = await models.Item.findOneAndUpdate({
         user: userId,
         _id: idToToggle,
@@ -149,6 +150,9 @@ const databaseController = {
       },{
         returnDocument: 'after'
       }).exec();
+
+      // update the item in the grocery list
+      // find the grocery list
 
       console.log("Updated", updatedItem);
       res.locals.updatedItem = updatedItem;

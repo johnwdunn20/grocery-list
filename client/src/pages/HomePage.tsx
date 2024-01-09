@@ -97,14 +97,11 @@ const HomePage = () => {
   }
 
   // Delete an item
-  const deleteItem = (e) => {
-    // probably an easier way to get the form id
-    const id = e.target.parentElement.previousSibling.id;
-    // immediately remove elem (if there's a db error, will reappear on page refresh)
+  const deleteItem = (id:string) => {
+
+    // immediately remove elem by updating state
     // need to refresh page in case you deleted an entire aisle
 
-    // commenting this out as it *sometimes* errors
-    // e.target.parentElement.parentElement.remove()
     console.log('Sending request to delete: ', id);
     fetch(`/api/deleteItem/${id}`, {
       method: 'DELETE'
