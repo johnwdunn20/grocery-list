@@ -126,6 +126,14 @@ const databaseController = {
         }
       ).exec();
 
+      // if no items left, delete the grocery list
+      if (updated_grocery && updated_grocery.items.length === 0) {
+        await models.Grocery.findOneAndDelete({
+          user: userId,
+          _id: categoryId,
+        }).exec();
+      }
+
       // console.log("Updated grocery: ", updated_grocery);
 
       if (!deletedItem || !updated_grocery) {
