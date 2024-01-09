@@ -6,6 +6,7 @@ import NewItem from '../components/NewItem';
 import ShoppingListContainer from '../components/ShoppingListContainer'
 import SideBar from "../components/SideBar";
 import Profile from "../components/Profile";
+import { set } from "react-hook-form";
 
 const HomePage = () => {
 
@@ -97,14 +98,25 @@ const HomePage = () => {
   }
 
   // Delete an item
-  const deleteItem = (id:string) => {
+  const deleteItem = (id:string, categoryId: string) => {
 
     // immediately remove elem by updating state
-    // need to refresh page in case you deleted an entire aisle
+    const updatedGroceries = groceries.map(grocery => {
+      if (grocery._id === categoryId) {
+        const updatedItems = grocery.items.filter(item => item._id !== id);
+        return { ...grocery, items: updatedItems };
+      } else {
+        return grocery;
+      }
+    });
+    setGroceries(updatedGroceries);
 
+    // update the database
     console.log('Sending request to delete: ', id);
-    fetch(`/api/deleteItem/${id}`, {
+    fetch(`/api/deleteItem`, {
       method: 'DELETE'
+      , headers: { 'Content-Type': 'application/json' }
+      , body: JSON.stringify({ id, categoryId })
     })
       .then(response => response.json())
       .then(data => {

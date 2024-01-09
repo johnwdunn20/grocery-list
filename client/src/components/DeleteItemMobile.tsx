@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSwipeable } from 'react-swipeable';
 import deleteIcon from '../images/delete.svg';
 
-const DeleteItemMobile = ({deleteItem, id}) => {
+const DeleteItemMobile = ({deleteItem, id, categoryId}) => {
   console.log('innerWidth', window.innerWidth);
 
   const [swipeDistance, setSwipeDistance] = useState(0);
@@ -18,7 +18,7 @@ const DeleteItemMobile = ({deleteItem, id}) => {
       onSwipedLeft: () => {
         if (swipeDistance >= threshold) {
           // deleteItem(id); function needs to be updated so that I have the info I need to delete it
-          console.log('DELETED');
+          deleteItem(id, categoryId)
         } else {
           setSwipeDistance(0); // Reset swipe distance if the swipe was not enough
         }
