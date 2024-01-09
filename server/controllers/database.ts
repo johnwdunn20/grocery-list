@@ -4,13 +4,14 @@ const databaseController = {
   // Get all groceries and format them for the frontend
   getGroceries: async (req, res, next) => {
     try {
-      // get the jwt from cookies?
+      const userId = res.locals.id;
+
       const groceries = await models.Grocery.find({
-        user: req.user.id,
+        user: userId,
         isHistory: false,
       }); // **** Will need to be updated to find the actual user's data
       res.locals.groceries = groceries;
-      // return next();
+      return next();
     } catch (err) {
       return next({
         log: `Express error handler caught error in databaseController.getGroceries. Error: ${err}`,
@@ -22,6 +23,7 @@ const databaseController = {
 
   addItem: async (req, res, next) => {
     try {
+      // console.log('add item invoked');
       const { newItem } = req.body;
       const category = res.locals.category;
       const userId = res.locals.id;
