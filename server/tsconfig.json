@@ -11,7 +11,7 @@
     "allowJs": true,          // allow JavaScript files to be compiled
   },
   "include": [
-    "/**/*"
+    "src/**/*"
     ],
   "exclude": ["node_modules"]
 }
