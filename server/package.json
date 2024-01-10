@@ -2,7 +2,8 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "babel src --out-dir dist --extensions '.ts,.js' --minified --no-comments",
-    "dev": "nodemon --exec babel-node --extensions '.ts,.js' server.ts"
+    "clean": "rm -rf dist",
+    "dev": "nodemon --exec babel-node --extensions '.ts,.js' src/server.ts"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",
