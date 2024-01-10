@@ -169,6 +169,7 @@ const authController = {
       }
       // set userId on res.locals
       res.locals.id = user.id;
+      res.locals.name = user.name;
       return next();
     } catch (err) {
       return next({

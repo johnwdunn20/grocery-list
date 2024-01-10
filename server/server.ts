@@ -117,7 +117,7 @@ apiRouter.post('/logout',
 apiRouter.get('/isLoggedIn',
   authController.isLoggedIn,
   (req: Request, res: Response) => {
-    return res.status(200).json(res.locals.id);
+    return res.status(200).json(res.locals.name);
   }
 );
 

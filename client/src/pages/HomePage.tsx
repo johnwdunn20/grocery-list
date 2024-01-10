@@ -35,7 +35,8 @@ const HomePage = () => {
       if (response.ok) {
         setIsLoggedIn(true);
         const data = await response.json();
-        setUsername(data.username);
+        setUsername(data);
+        console.log(data);
         console.log('isLoggedin: ', isLoggedIn);
       }
     } catch (err) {
@@ -246,7 +247,7 @@ const HomePage = () => {
 
   return (
     <>
-      <FullNavBar isLoggedIn={isLoggedIn} />
+      <FullNavBar isLoggedIn={isLoggedIn} username={username} />
 
       <main className=" w-full lg:w-3/4 xl:w-2/3 mx-auto ">
         <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} updateNewItem={updateNewItem} resetLastCategory={resetLastCategory} />
