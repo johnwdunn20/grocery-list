@@ -140,7 +140,49 @@ const HomePage = () => {
       .catch(err => console.log(err));
   };
 
+  const clearAll = async () => {
+    // update state
+    setGroceries([]);
 
+    // update db
+    try {
+      const response = await fetch('/api/clearAll', {
+        method: 'POST'
+      });
+      if (response.ok) {
+        setNewItemToggle(!newItemToggle);
+      } else {
+        console.log('Error clearing all items');
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const clearFound = async () => {
+    // update state
+    const updatedGroceries = groceries.map(grocery => {
+      const updatedItems = grocery.items.filter(item => item.checked === false);
+      return { ...grocery, items: updatedItems };
+    });
+    console.log('Updated groceries: ', updatedGroceries);
+    setGroceries(updatedGroceries);
+    // update db
+    try {
+      const response = await fetch('/api/clearFound', {
+        method: 'POST'
+      });
+      if (response.ok) {
+        setNewItemToggle(!newItemToggle);
+      } else {
+        console.log('Error clearing all items');
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <>
@@ -148,7 +190,7 @@ const HomePage = () => {
 
       <main className=" w-full lg:w-3/4 xl:w-2/3 mx-auto ">
         <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} updateNewItem={updateNewItem} resetLastCategory={resetLastCategory} />
-        <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck}/>
+        <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck} clearAll={clearAll} clearFound={clearFound}/>
       </main>
     </>
   );

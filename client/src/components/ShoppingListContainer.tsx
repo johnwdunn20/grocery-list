@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Aisle from './Aisle'
 
-const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck }) => {
+const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck, clearAll, clearFound }) => {
   console.log('Groceries: ', groceries);
 
   const [aisleElems, setAisleElems] = useState([])
@@ -31,9 +31,9 @@ const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck }) => {
     <>
 
       <div className="p-4 w-full lg:w-3/4 xl:w-2/3 mx-auto">
-        <section className="flex justify-evenly mb-4">
-          <button className="bg-secondaryBlue text-white rounded-md py-2 px-4 shadow-md hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-200 ease-in-out">Clear Found Items</button>
-          <button className="bg-secondaryBlue text-white rounded-md py-2 px-4 shadow-md hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-200 ease-in-out">Clear All</button>
+        <section className="flex justify-evenly mb-4 z-10">
+          <button className="bg-secondaryBlue text-white rounded-md py-2 px-4 shadow-md hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-200 ease-in-out" onClick={clearFound}>Clear Found Items</button>
+          <button className="bg-secondaryBlue text-white rounded-md py-2 px-4 shadow-md hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50 transition-all duration-200 ease-in-out" onClick={clearAll}>Clear All</button>
         </section>
 
         <section className="flex items-center mt-6">

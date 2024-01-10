@@ -22,7 +22,7 @@ const Categorizing = ({ lastCategory, newItem, updateNewItem, resetLastCategory 
 
   return (
     <>
-      <section className={`newCategorization flex justify-around items-center w-full h-12 rounded-md mt-2 text-white transition-all duration-500 ease-in-out transform ${show ? 'translate-y-0 bg-green-700 border-2' : 'translate-y-full'}`}>
+      <section className={`newCategorization flex justify-around z-0 items-center w-full h-12 rounded-md mt-2 text-white transition-all duration-500 ease-in-out transform ${show ? 'translate-y-0 bg-green-700 border-2' : 'translate-y-full'}`}>
         {newItem && <p className='pl-4 text-lg'>{newItem}</p>}
         {newItem &&
           <div className='container w-auto h-full flex items-center justify-center'>
