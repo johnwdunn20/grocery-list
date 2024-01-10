@@ -7,6 +7,7 @@ import ShoppingListContainer from '../components/ShoppingListContainer'
 import SideBar from "../components/SideBar";
 import Profile from "../components/Profile";
 import { set } from "react-hook-form";
+import FullNavBar from "../components/FullNavBar";
 
 const HomePage = () => {
 
@@ -17,9 +18,7 @@ const HomePage = () => {
   
   const [newItemToggle, setNewItemToggle] = useState<boolean>(false);
   
-  // toggle side bar and profile
-  const [sideBarOpen, setSideBarOpen] = useState<boolean>(false);
-  const [profileOpen, setProfileOpen] = useState<boolean>(false);
+
 
   // get initial data on page load
   const getGroceries = async () => {
@@ -141,31 +140,11 @@ const HomePage = () => {
       .catch(err => console.log(err));
   };
 
-  // Open the sidebar. *** Probably easier with booleans and ternary operators
-  const showSideBar = () => {
-    setSideBarOpen(true);
-  }
-  // Close the sidebar
-  const closeSideBar = () => {
-    setSideBarOpen(false);
-  }
 
-  // Open the profile
-  const showProfile = () => {
-    setProfileOpen(true);
-  }
-  // Close the profile
-  const closeProfile = () => {
-    setProfileOpen(false);
-  }
 
   return (
     <>
-      <div className="w-full lg:w-3/4 xl:w-2/3 mx-auto">
-        <SideBar sideBarOpen={sideBarOpen} closeSideBar={closeSideBar} />
-        <Profile profileOpen={profileOpen} closeProfile={closeProfile} />
-        <Header showSideBar={showSideBar} showProfile={showProfile} />
-      </div>
+      <FullNavBar />
 
       <main className=" w-full lg:w-3/4 xl:w-2/3 mx-auto ">
         <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} updateNewItem={updateNewItem} resetLastCategory={resetLastCategory} />
