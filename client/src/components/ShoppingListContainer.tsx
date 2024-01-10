@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Aisle from './Aisle'
 
-const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck, clearAll, clearFound }) => {
+const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck, clearAll, clearFound, showHidePurchasedItems}) => {
   console.log('Groceries: ', groceries);
 
   const [aisleElems, setAisleElems] = useState([])
@@ -9,6 +9,7 @@ const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck, clearAll, c
 
   const handleToggle = () => {
     setIsToggled(!isToggled);
+    showHidePurchasedItems();
   }
 
   useEffect(() => {

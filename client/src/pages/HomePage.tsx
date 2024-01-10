@@ -15,7 +15,7 @@ const HomePage = () => {
 
   const [lastCategory, setLastCategory] = useState<string>('');
   const [newItem, setNewItem] = useState<string>('');
-  
+  const [showingPurchasedItems, setShowingPurchasedItems] = useState<boolean>(false);
   const [newItemToggle, setNewItemToggle] = useState<boolean>(false);
   
 
@@ -184,13 +184,29 @@ const HomePage = () => {
     }
   }
 
+  const showHidePurchasedItems = () => {
+    // if currently hiding purchased items, show them by getting all items from db
+    if (!showingPurchasedItems) {
+      setNewItemToggle(!newItemToggle);
+    } else {
+      // if currently showing purchased items, hide them by filtering out checked items from state
+      const updatedGroceries = groceries.map(grocery => {
+        const updatedItems = grocery.items.filter(item => item.checked === false);
+        return { ...grocery, items: updatedItems };
+      });
+      console.log('Updated groceries: ', updatedGroceries);
+      setGroceries(updatedGroceries);
+    }
+    setShowingPurchasedItems(!showingPurchasedItems);
+  }
+
   return (
     <>
       <FullNavBar />
 
       <main className=" w-full lg:w-3/4 xl:w-2/3 mx-auto ">
         <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} updateNewItem={updateNewItem} resetLastCategory={resetLastCategory} />
-        <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck} clearAll={clearAll} clearFound={clearFound}/>
+        <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck} clearAll={clearAll} clearFound={clearFound} showHidePurchasedItems={showHidePurchasedItems}/>
       </main>
     </>
   );
