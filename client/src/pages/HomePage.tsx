@@ -8,6 +8,7 @@ import SideBar from "../components/SideBar";
 import Profile from "../components/Profile";
 import { set } from "react-hook-form";
 import FullNavBar from "../components/FullNavBar";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
 
@@ -253,7 +254,7 @@ const HomePage = () => {
         <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} updateNewItem={updateNewItem} resetLastCategory={resetLastCategory} />
         {!isLoggedIn &&
           <section className="flex justify-center items-center">
-            <h1 className="text-2xl p-2 text-center text-zinc-100 bg-red-500 rounded-md sm:w-2/3 md:w-1/2 h-12 italic">Login to Save your List</h1>
+              <Link className="text-2xl p-2 text-center text-zinc-100 bg-red-500 rounded-md sm:w-2/3 md:w-1/2 h-12 italic" to='/login'>Login to Save your List</Link> 
           </section>
         }
         <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck} clearAll={clearAll} clearFound={clearFound} showHidePurchasedItems={showHidePurchasedItems}/>

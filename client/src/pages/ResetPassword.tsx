@@ -52,7 +52,8 @@ const Login = () => {
 
           <div>
             <p className='text-slate-500'>We will send you an email to reset your password</p>
-            <p>**Update to display pasword when reset</p>
+            <h1 className='text-red-500 text-xl'>Coming Soon</h1>
+            <p className='text-red-500'>Email johnwdunn20@gmail.com if you forgot your password</p>
           </div>
 
           <div className='flex justify-center mt-5'>
