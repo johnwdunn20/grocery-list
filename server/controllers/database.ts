@@ -231,23 +231,29 @@ const databaseController = {
         });
       }
       // *** this logic needs to be updated if I want to keep history
-      // get all the items for that user where isHistory=false
-      const groceries = await models.Grocery.find({
+      // delete all items that are checked
+      const deletedItems = await models.Item.deleteMany({
+        user: userId,
+        checked: true,
+      }).exec();
+
+      // delete all items in grocery list that are checked
+      const updated_groceries = await models.Grocery.updateMany(
+        {
+          user: userId,
+          isHistory: false,
+        },
+        {
+          $pull: { items: { checked: true } },
+        }
+      ).exec();
+
+      // delete all grocery lists that are empty
+      await models.Grocery.deleteMany({
         user: userId,
         isHistory: false,
-      });
-      // iterate through the items and delete the ones that are checked
-      groceries.forEach(async (grocery) => {
-        grocery.items.forEach(async (item) => {
-          if (item.checked) {
-            await models.Item.findOneAndDelete({ _id: item._id }).exec();
-          }
-        });
-      });
-      // save the items
-      groceries.forEach(async (grocery) => {
-        await grocery.save();
-      });
+        items: [],
+      }).exec();
 
       return next();
     } catch (err) {
