@@ -7,6 +7,8 @@ import ShoppingListContainer from '../components/ShoppingListContainer'
 import SideBar from "../components/SideBar";
 import Profile from "../components/Profile";
 import { set } from "react-hook-form";
+import FullNavBar from "../components/FullNavBar";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
 
@@ -14,12 +16,37 @@ const HomePage = () => {
 
   const [lastCategory, setLastCategory] = useState<string>('');
   const [newItem, setNewItem] = useState<string>('');
-  
+  const [showingPurchasedItems, setShowingPurchasedItems] = useState<boolean>(true);
   const [newItemToggle, setNewItemToggle] = useState<boolean>(false);
-  
-  // toggle side bar and profile
-  const [sideBarOpen, setSideBarOpen] = useState<boolean>(false);
-  const [profileOpen, setProfileOpen] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>('');
+  console.log('isLoggedin: ', isLoggedIn);
+
+  // check if user is logged in
+  const checkIfLoggedIn = async () => {
+    try {
+      const response = await fetch('/api/isLoggedIn', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      // response is ok when user is logged in
+      if (response.ok) {
+        setIsLoggedIn(true);
+        const data = await response.json();
+        setUsername(data);
+        console.log(data);
+        console.log('isLoggedin: ', isLoggedIn);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  // check if logged in on page load
+  checkIfLoggedIn();
+
 
   // get initial data on page load
   const getGroceries = async () => {
@@ -50,28 +77,46 @@ const HomePage = () => {
 
   // Ability to save new item
   const saveNewItem = (e) => {
+    // console.log('Saving new item');
     e.preventDefault();
     const inputElem = e.target.querySelector('#new-item-input');
     const newItem = inputElem.value;
-    setNewItem(newItem);
     if (newItem === '') return;
+    setNewItem(newItem);
     inputElem.value = '';
-    fetch('/api/addItem', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ newItem })
-    })
-      .then(response => response.json())
-      .then(data => {
-        // set last category
-        setLastCategory(data);
-        console.log('New category: ', data);
-        if (data) setNewItemToggle(!newItemToggle);
+    // if user isn't logged in, just get the category to display it
+    if (!isLoggedIn) {
+      fetch('/api/category', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ newItem })
       })
-      .catch(err => console.log(err));
+        .then(response => response.json())
+        .then(data => {
+          setLastCategory(data);
+        })
+        .catch(err => console.log(err));
+    } else {
+      // if user is logged in, add to the db
+      fetch('/api/addItem', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ newItem })
+      })
+        .then(response => response.json())
+        .then(data => {
+          // set last category
+          setLastCategory(data);
+          if (data) setNewItemToggle(!newItemToggle);
+        })
+        .catch(err => console.log(err));
+    }
   }
 
   // Ability to check an item
@@ -81,8 +126,8 @@ const HomePage = () => {
       if (grocery._id === categoryId) {
         const updatedItems = grocery.items.map(item => {
           if (item._id === id) {
-            console.log('Item to update: ', item);
-            console.log('Updated item: ', { ...item, checked });
+            // console.log('Item to update: ', item);
+            // console.log('Updated item: ', { ...item, checked });
             return { ...item, checked };
           } else {
             return item;
@@ -103,7 +148,7 @@ const HomePage = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Toggle updated: ', data);
+        // console.log('Toggle updated: ', data);
         if (data) setNewItemToggle(!newItemToggle);
       })
       .catch(err => console.log(err))
@@ -141,35 +186,78 @@ const HomePage = () => {
       .catch(err => console.log(err));
   };
 
-  // Open the sidebar. *** Probably easier with booleans and ternary operators
-  const showSideBar = () => {
-    setSideBarOpen(true);
-  }
-  // Close the sidebar
-  const closeSideBar = () => {
-    setSideBarOpen(false);
+  const clearAll = async () => {
+    // update state
+    setGroceries([]);
+
+    // update db
+    try {
+      const response = await fetch('/api/clearAll', {
+        method: 'POST'
+      });
+      if (response.ok) {
+        setNewItemToggle(!newItemToggle);
+      } else {
+        console.log('Error clearing all items');
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  // Open the profile
-  const showProfile = () => {
-    setProfileOpen(true);
+  const clearFound = async () => {
+    // update state
+    const updatedGroceries = groceries.map(grocery => {
+      const updatedItems = grocery.items.filter(item => item.checked === false);
+      return { ...grocery, items: updatedItems };
+    });
+    console.log('Updated groceries: ', updatedGroceries);
+    setGroceries(updatedGroceries);
+    // update db
+    try {
+      const response = await fetch('/api/clearFound', {
+        method: 'POST'
+      });
+      if (response.ok) {
+        setNewItemToggle(!newItemToggle);
+      } else {
+        console.log('Error clearing all items');
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
-  // Close the profile
-  const closeProfile = () => {
-    setProfileOpen(false);
+
+  const showHidePurchasedItems = () => {
+    // if currently hiding purchased items, show them by getting all items from db
+    if (!showingPurchasedItems) {
+      setNewItemToggle(!newItemToggle);
+    } else {
+      // if currently showing purchased items, hide them by filtering out checked items from state
+      const updatedGroceries = groceries.map(grocery => {
+        const updatedItems = grocery.items.filter(item => item.checked === false);
+        return { ...grocery, items: updatedItems };
+      });
+      console.log('Updated groceries: ', updatedGroceries);
+      setGroceries(updatedGroceries);
+    }
+    setShowingPurchasedItems(!showingPurchasedItems);
   }
 
   return (
     <>
-      <div className="w-full lg:w-3/4 xl:w-2/3 mx-auto">
-        <SideBar sideBarOpen={sideBarOpen} closeSideBar={closeSideBar} />
-        <Profile profileOpen={profileOpen} closeProfile={closeProfile} />
-        <Header showSideBar={showSideBar} showProfile={showProfile} />
-      </div>
+      <FullNavBar isLoggedIn={isLoggedIn} username={username} />
 
       <main className=" w-full lg:w-3/4 xl:w-2/3 mx-auto ">
         <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} updateNewItem={updateNewItem} resetLastCategory={resetLastCategory} />
-        <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck}/>
+        {!isLoggedIn &&
+          <section className="flex justify-center items-center">
+              <Link className="text-2xl p-2 text-center text-zinc-100 bg-red-500 rounded-md sm:w-2/3 md:w-1/2 h-12 italic" to='/login'>Login to Save your List</Link> 
+          </section>
+        }
+        <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck} clearAll={clearAll} clearFound={clearFound} showHidePurchasedItems={showHidePurchasedItems}/>
       </main>
     </>
   );

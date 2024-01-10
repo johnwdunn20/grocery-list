@@ -151,7 +151,7 @@ const authController = {
       // check if token exists
       if (!token) {
         return next({
-          log: `No token`,
+          log: `No token on JWT`,
           status: 400,
           message: { err: `No token`},
         });
@@ -169,6 +169,7 @@ const authController = {
       }
       // set userId on res.locals
       res.locals.id = user.id;
+      res.locals.name = user.name;
       return next();
     } catch (err) {
       return next({
