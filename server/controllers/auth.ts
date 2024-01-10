@@ -151,7 +151,7 @@ const authController = {
       // check if token exists
       if (!token) {
         return next({
-          log: `No token`,
+          log: `No token on JWT`,
           status: 400,
           message: { err: `No token`},
         });

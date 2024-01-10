@@ -46,7 +46,7 @@ const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck, clearAll, c
                 ${isToggled ? 'translate-x-full' : ''}`}></div>
             </div>
             <h2 className="ml-3 text-secondaryBlue text-lg">
-              {isToggled ? 'Hide Purchased Items' : 'Show Purchased Items'}
+              {isToggled ? 'Show Purchased Items' : 'Hide Purchased Items'}
             </h2>
           </label>
         </section>

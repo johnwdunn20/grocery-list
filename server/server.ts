@@ -34,12 +34,20 @@ apiRouter.get('/groceries',
 
 // Add new Item
 apiRouter.post('/addItem',
-  authController.isLoggedIn,
   openAIController.getCategory,
+  authController.isLoggedIn,
   databaseController.addItem,
   (req: Request, res: Response) => {
     console.log(req.body.newItem);
     return res.status(200).json(res.locals.category)
+  }
+);
+
+// Get Category (when not logged in)
+apiRouter.post('/category',
+  openAIController.getCategory,
+  (req: Request, res: Response) => {
+    return res.status(200).json(res.locals.category);
   }
 );
 
@@ -102,6 +110,14 @@ apiRouter.post('/logout',
   authController.logout,
   (req: Request, res: Response) => {
     return res.status(200).send('Logged out');
+  }
+);
+
+// isLoggedIn - sends response if user is logged in
+apiRouter.get('/isLoggedIn',
+  authController.isLoggedIn,
+  (req: Request, res: Response) => {
+    return res.status(200).json(res.locals.id);
   }
 );
 

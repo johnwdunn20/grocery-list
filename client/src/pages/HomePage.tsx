@@ -15,9 +15,35 @@ const HomePage = () => {
 
   const [lastCategory, setLastCategory] = useState<string>('');
   const [newItem, setNewItem] = useState<string>('');
-  const [showingPurchasedItems, setShowingPurchasedItems] = useState<boolean>(false);
+  const [showingPurchasedItems, setShowingPurchasedItems] = useState<boolean>(true);
   const [newItemToggle, setNewItemToggle] = useState<boolean>(false);
-  
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>('');
+  console.log('isLoggedin: ', isLoggedIn);
+
+  // check if user is logged in
+  const checkIfLoggedIn = async () => {
+    try {
+      const response = await fetch('/api/isLoggedIn', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      // response is ok when user is logged in
+      if (response.ok) {
+        setIsLoggedIn(true);
+        const data = await response.json();
+        setUsername(data.username);
+        console.log('isLoggedin: ', isLoggedIn);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  // check if logged in on page load
+  checkIfLoggedIn();
 
 
   // get initial data on page load
@@ -49,28 +75,46 @@ const HomePage = () => {
 
   // Ability to save new item
   const saveNewItem = (e) => {
+    // console.log('Saving new item');
     e.preventDefault();
     const inputElem = e.target.querySelector('#new-item-input');
     const newItem = inputElem.value;
-    setNewItem(newItem);
     if (newItem === '') return;
+    setNewItem(newItem);
     inputElem.value = '';
-    fetch('/api/addItem', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ newItem })
-    })
-      .then(response => response.json())
-      .then(data => {
-        // set last category
-        setLastCategory(data);
-        console.log('New category: ', data);
-        if (data) setNewItemToggle(!newItemToggle);
+    // if user isn't logged in, just get the category to display it
+    if (!isLoggedIn) {
+      fetch('/api/category', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ newItem })
       })
-      .catch(err => console.log(err));
+        .then(response => response.json())
+        .then(data => {
+          setLastCategory(data);
+        })
+        .catch(err => console.log(err));
+    } else {
+      // if user is logged in, add to the db
+      fetch('/api/addItem', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ newItem })
+      })
+        .then(response => response.json())
+        .then(data => {
+          // set last category
+          setLastCategory(data);
+          if (data) setNewItemToggle(!newItemToggle);
+        })
+        .catch(err => console.log(err));
+    }
   }
 
   // Ability to check an item
@@ -80,8 +124,8 @@ const HomePage = () => {
       if (grocery._id === categoryId) {
         const updatedItems = grocery.items.map(item => {
           if (item._id === id) {
-            console.log('Item to update: ', item);
-            console.log('Updated item: ', { ...item, checked });
+            // console.log('Item to update: ', item);
+            // console.log('Updated item: ', { ...item, checked });
             return { ...item, checked };
           } else {
             return item;
@@ -102,7 +146,7 @@ const HomePage = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Toggle updated: ', data);
+        // console.log('Toggle updated: ', data);
         if (data) setNewItemToggle(!newItemToggle);
       })
       .catch(err => console.log(err))
@@ -202,10 +246,15 @@ const HomePage = () => {
 
   return (
     <>
-      <FullNavBar />
+      <FullNavBar isLoggedIn={isLoggedIn} />
 
       <main className=" w-full lg:w-3/4 xl:w-2/3 mx-auto ">
         <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} updateNewItem={updateNewItem} resetLastCategory={resetLastCategory} />
+        {!isLoggedIn &&
+          <section className="flex justify-center items-center">
+            <h1 className="text-2xl p-2 text-center text-zinc-100 bg-red-500 rounded-md sm:w-2/3 md:w-1/2 h-12 italic">Login to Save your List</h1>
+          </section>
+        }
         <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck} clearAll={clearAll} clearFound={clearFound} showHidePurchasedItems={showHidePurchasedItems}/>
       </main>
     </>

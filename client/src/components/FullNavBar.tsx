@@ -3,7 +3,11 @@ import SideBar from "../components/SideBar";
 import Header from '../components/Header';
 import Profile from "../components/Profile";
 
-const FullNavBar = () => {
+type FullNavBarProps = {
+  isLoggedIn?: boolean;
+}
+
+const FullNavBar:React.FC<FullNavBarProps> = ({ isLoggedIn }) => {
     // toggle side bar and profile
     const [sideBarOpen, setSideBarOpen] = useState<boolean>(false);
     const [profileOpen, setProfileOpen] = useState<boolean>(false);
@@ -25,11 +29,11 @@ const FullNavBar = () => {
     const closeProfile = () => {
       setProfileOpen(false);
     }
-
+  console.log('FullNavBar isLoggedIn: ', isLoggedIn);
   return (
     <div className="w-full lg:w-3/4 xl:w-2/3 mx-auto">
       <SideBar sideBarOpen={sideBarOpen} closeSideBar={closeSideBar} />
-      <Profile profileOpen={profileOpen} closeProfile={closeProfile} />
+      <Profile profileOpen={profileOpen} closeProfile={closeProfile} isLoggedIn={isLoggedIn} />
       <Header showSideBar={showSideBar} showProfile={showProfile} />
   </div>
   )
