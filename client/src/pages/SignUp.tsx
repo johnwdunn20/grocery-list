@@ -24,15 +24,26 @@ const SignUp = () => {
       password: ''
     }
   })
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data)
     // navigate('/');
-    // navigate needs to happen after verifying authentication
+    // navigate after verifying authentication
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+      credentials: 'include'
+    })
+    if (response.ok) {
+      navigate('/');
+    }
   }
 
-  console.log('Errors: ', errors);
-  console.log(watch("email"));
-  console.log(watch("password"));
+  // console.log('Errors: ', errors);
+  // console.log(watch("email"));
+  // console.log(watch("password"));
 
   return (
     <main className='h-screen flex flex-col justify-center items-center bg-primaryBlue'>
