@@ -1,7 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-module.exports = {
+const isProduction = process.env.NODE_ENV === 'production';
+
+// dev configs (prod configs overwrite these below)
+const config = {
   mode: 'development', // I don't think I need this because setting this in pacakage.json scripts
   entry: './src/index.tsx',
   output: {
@@ -52,14 +58,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           'postcss-loader',
         ],
       },
       
       {
-        test: /\.(png|jpe?g|svg|gif)$/i,
+        test: /\.(png|jpe?g|svg|gif|ico)$/i,
         use: [
           {
             loader: "file-loader",
@@ -78,3 +84,34 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 }
+
+if (isProduction) {
+  config.mode = 'production';
+  config.devtool = 'source-map';
+  config.devServer = {};
+  config.optimization = {
+    splitChunks: {
+      chunks: 'all',
+    }
+  };
+  config.output = {
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
+    chunkFilename: '[name].[contenthash].chunk.js',
+    publicPath: '/',
+  };
+  config.plugins.push(
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].[contenthash].css',
+    })
+  );
+  config.plugins.push(
+    new TerserPlugin()
+  );
+  config.plugins.push(
+    new CleanWebpackPlugin()
+  );
+}
+
+module.exports = config;
