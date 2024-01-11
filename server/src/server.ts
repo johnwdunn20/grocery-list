@@ -6,19 +6,19 @@ import cors from 'cors';
 import databaseController from './controllers/database';
 import authController from './controllers/auth';
 import openAIController from './controllers/openAi';
+import 'dotenv/config';
 
-
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app: Express = express();
+
+// Serve static files from the client's build directory for production
+app.use(express.static(path.join(__dirname, '../../client/dist')));
 
 // standard configs
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
-app.use(cors({
-  origin: 'http://localhost:8080', // ** probably need to update this
-  credentials: true,
-}));
+app.use(cors()); // **** currently allows all origins - needs to be updated for frontend
 
 // Router so all requests go to /api
 const apiRouter = express.Router();
