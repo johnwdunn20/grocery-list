@@ -25,7 +25,7 @@ const Login = () => {
   })
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data)
-    const response = await fetch('/api/login', {
+    const response = await fetch(`${process.env.API_URL || ''}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -5,7 +5,8 @@
     "clean": "rm -rf dist",
     "dev": "nodemon --exec babel-node --extensions '.ts,.js' src/server.ts",
     "docker:build": "docker build -t grocery-server .",
-    "docker:run": "docker run -p 3000:3000 grocery-server"
+    "docker:run": "docker run -p 3000:3000 grocery-server",
+    "docker:create-network": "docker network create grocery-network"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",

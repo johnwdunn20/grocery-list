@@ -1,0 +1,16 @@
+version: '3'
+services:
+  server:
+    build: ./server
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    # other configurations like volumes, networks, etc.
+
+  client:
+    build: ./client
+    ports:
+      - "8080:80"
+    environment:
+    - API_URL=http://server:3000

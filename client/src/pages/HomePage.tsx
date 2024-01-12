@@ -25,7 +25,7 @@ const HomePage = () => {
   // check if user is logged in
   const checkIfLoggedIn = async () => {
     try {
-      const response = await fetch('/api/isLoggedIn', {
+      const response = await fetch(`${process.env.API_URL || ''}/api/isLoggedIn`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -51,7 +51,7 @@ const HomePage = () => {
   // get initial data on page load
   const getGroceries = async () => {
     try {
-      const response = await fetch('/api/groceries');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/groceries`);
       
       if (!response.ok) {
         return console.log('Error fetching groceries');
@@ -86,7 +86,7 @@ const HomePage = () => {
     inputElem.value = '';
     // if user isn't logged in, just get the category to display it
     if (!isLoggedIn) {
-      fetch('/api/category', {
+      fetch(`${process.env.API_URL || ''}/api/category`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -101,7 +101,7 @@ const HomePage = () => {
         .catch(err => console.log(err));
     } else {
       // if user is logged in, add to the db
-      fetch('/api/addItem', {
+      fetch(`${process.env.API_URL || ''}/api/addItem`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -141,7 +141,7 @@ const HomePage = () => {
     setGroceries(updatedGroceries);
 
     // update in db
-    fetch(`/api/toggleCheck/`, {
+    fetch(`${process.env.API_URL || ''}/api/toggleCheck/`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, categoryId, checked })
@@ -173,7 +173,7 @@ const HomePage = () => {
 
     // update the database
     console.log('Sending request to delete: ', id);
-    fetch(`/api/deleteItem`, {
+    fetch(`${process.env.API_URL || ''}/api/deleteItem`, {
       method: 'DELETE'
       , headers: { 'Content-Type': 'application/json' }
       , body: JSON.stringify({ id, categoryId })
@@ -192,7 +192,7 @@ const HomePage = () => {
 
     // update db
     try {
-      const response = await fetch('/api/clearAll', {
+      const response = await fetch(`${process.env.API_URL || ''}/api/clearAll`, {
         method: 'POST'
       });
       if (response.ok) {
@@ -216,7 +216,7 @@ const HomePage = () => {
     setGroceries(updatedGroceries);
     // update db
     try {
-      const response = await fetch('/api/clearFound', {
+      const response = await fetch(`${process.env.API_URL || ''}/api/clearFound`, {
         method: 'POST'
       });
       if (response.ok) {
