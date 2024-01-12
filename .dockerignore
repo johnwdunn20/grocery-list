@@ -1,2 +1,4 @@
 node_modules
-.gitignore
+npm-debug.log
+client/src
+server/src
