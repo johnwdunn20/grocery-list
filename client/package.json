@@ -3,9 +3,7 @@
     "build": "NODE_ENV=production webpack --mode production --config webpack.config.js",
     "start": "serve -s dist",
     "dev": "NODE_ENV=development webpack serve --mode development --config webpack.config.js",
-    "clean": "rm -rf dist",
-    "docker:build": "docker build -t grocery-client .",
-    "docker:run": "docker run -p 8080:80 grocery-client"
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
     "@babel/core": "^7.23.6",
