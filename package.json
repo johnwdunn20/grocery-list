@@ -11,6 +11,8 @@
     "install-client": "cd client && npm i",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
+    "build-client": "cd client && npm run build",
+    "build-server": "cd server && npm run build",
     "docker:prod": "docker-compose -f docker-compose.prod.yml up --build"
   },
   "repository": {
