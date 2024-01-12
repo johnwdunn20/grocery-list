@@ -51,7 +51,7 @@ const HomePage = () => {
   // get initial data on page load
   const getGroceries = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/groceries`);
+      const response = await fetch(`${process.env.API_URL}/api/groceries`);
       
       if (!response.ok) {
         return console.log('Error fetching groceries');

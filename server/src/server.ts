@@ -18,7 +18,9 @@ app.use(express.static(path.join(__dirname, '../../client/dist')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
-app.use(cors()); // **** currently allows all origins - needs to be updated for frontend
+app.use(cors(
+  {origin: '*'}
+)); // **** currently allows all origins - needs to be updated for frontend
 
 // Router so all requests go to /api
 const apiRouter = express.Router();

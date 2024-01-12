@@ -6,7 +6,8 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-    # other configurations like volumes, networks, etc.
+    env_file:
+      - server/.env
 
   client:
     build: ./client

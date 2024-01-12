@@ -10,7 +10,8 @@
     "install-server": "cd server && npm i",
     "install-client": "cd client && npm i",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "docker:prod": "docker-compose -f docker-compose.prod.yml up --build"
   },
   "repository": {
     "type": "git",

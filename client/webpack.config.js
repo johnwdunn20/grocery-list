@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -78,6 +79,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new Dotenv(),
   ],
   resolve: {
     // Enable importing JS / JSX files without specifying their extension in react components

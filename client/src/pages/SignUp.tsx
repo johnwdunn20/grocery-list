@@ -34,7 +34,7 @@ const SignUp = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data),
-      credentials: 'include'
+      // credentials: 'include'
     })
     if (response.ok) {
       navigate('/');
