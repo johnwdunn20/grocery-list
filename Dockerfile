@@ -20,6 +20,11 @@ WORKDIR /app
 COPY --from=client-build /app/dist ./client/dist
 COPY --from=server-build /app/dist ./server/dist
 COPY --from=server-build /app/node_modules ./server/node_modules
+# not sure why I need to copy only server node modules
+# right now it's not copying environment variables
+
+# Expose the port the app runs in
+EXPOSE 3000
 
 # Set up your start command
 CMD ["node", "./server/dist/server.js"]

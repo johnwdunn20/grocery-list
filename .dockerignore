@@ -1,4 +1,3 @@
 node_modules
-npm-debug.log
-client/src
-server/src
+client/node_modules
+server/node_modules
