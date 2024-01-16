@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "johnwdunn/grocery:prod",
+    "Name": "johnwdunn/grocery:prod-amd",
     "Update": "true"
   },
   "Ports": [
