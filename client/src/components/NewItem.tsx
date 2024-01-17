@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import Categorizing from "./Categorizing";
 
-export default function NewItem({saveNewItem, lastCategory, newItem, updateNewItem, resetLastCategory}) {
+type NewItemProps = {
+  saveNewItem: Function,
+  lastCategory: string,
+  newItem: string,
+  updateNewItem: Function,
+  resetLastCategory: Function
+}
+
+const NewItem: React.FC<NewItemProps> = ({saveNewItem, lastCategory, newItem, updateNewItem, resetLastCategory}) => {
 
   const [itemSaved, setItemSaved] = useState(false);
 
@@ -30,3 +38,5 @@ export default function NewItem({saveNewItem, lastCategory, newItem, updateNewIt
     </>
   );
 }
+
+export default NewItem;

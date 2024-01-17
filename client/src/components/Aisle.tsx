@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Item from './Item'
 
-const Aisle = ({ aisleTitle, itemsArr, deleteItem, toggleCheck, categoryId }) => {
+type AisleProps = {
+  aisleTitle: string,
+  itemsArr: Array<any>,
+  deleteItem: (id: string, categoryId: string) => void,
+  toggleCheck: Function,
+  categoryId: string
+}
 
-  const [itemElems, setItemElems] = useState();
+const Aisle:React.FC<AisleProps> = ({ aisleTitle, itemsArr, deleteItem, toggleCheck, categoryId }) => {
+
+  const [itemElems, setItemElems] = useState([]);
 
   useEffect(() => {
     setItemElems(itemsArr.map((itemObj, index) => {

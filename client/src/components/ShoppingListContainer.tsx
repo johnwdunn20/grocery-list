@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Aisle from './Aisle'
 
+type ShoppingListContainerProps = {
+  groceries: Array<any>,
+  deleteItem: Function,
+  toggleCheck: Function,
+  clearAll: Function,
+  clearFound: Function,
+  showHidePurchasedItems: Function
+}
+
 const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck, clearAll, clearFound, showHidePurchasedItems}) => {
   console.log('Groceries: ', groceries);
 

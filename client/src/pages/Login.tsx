@@ -8,14 +8,14 @@ type Inputs = {
   password: string
 }
 
-const Login = () => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
   const [incorrectLoginInfo, setIncorrectLoginInfo] = React.useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
