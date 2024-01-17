@@ -2,6 +2,7 @@ import path from 'path';
 import express, { Express, Request, Response, NextFunction,} from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import https from 'https';
 // import controllers
 import databaseController from './controllers/database';
 import authController from './controllers/auth';
@@ -122,6 +123,19 @@ apiRouter.get('/isLoggedIn',
     return res.status(200).json(res.locals.name);
   }
 );
+
+// Catch-all routes to serve index.html for unknown routes
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+});
+
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+});
+
+app.get('/resetpassword', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+});
 
 // catch-all
 app.use('*', (req: Request, res: Response) => {

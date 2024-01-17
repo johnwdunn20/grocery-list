@@ -1,3 +1,1 @@
-// Client hot reloading is not working
-// Need to set up server and basic routes
-  - should have nodemon for it
+// Client hot reloading requires npm run build in the client folder when using the docker container
