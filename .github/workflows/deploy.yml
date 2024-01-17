@@ -28,14 +28,4 @@
 
 #     # https://akashsingh.blog/complete-guide-on-deploying-a-docker-application-react-to-aws-elastic-beanstalk-using-docker-hub-and-github-actions
 
-#     - name: Upload Dockerrun.aws.json to AWS Elastic Beanstalk
-#       uses: einaregilsson/beanstalk-deploy@v19
-#       with:
-#         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#         application_name: your-application-name
-#         environment_name: your-environment-name
-#         version_label: your-version-label
-#         region: your-aws-region
-#         file: Dockerrun.aws.json
     
