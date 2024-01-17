@@ -1,0 +1,41 @@
+# name: Deploy to AWS Elastic Beanstalk
+# on:
+#   push:
+#     branches:
+#       # - main
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#     # Checkout the repository to the GitHub Actions runner??
+#     - name: Checkout code
+#       uses: actions/checkout@v3
+
+#     - name: Login to Docker Hub
+#       uses: docker/login-action@v1
+#       with:
+#         username: ${{ secrets.DOCKER_USERNAME }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
+      
+#     - name: Build docker image
+#       run: npm run docker:build-amd
+#     - name: Push to docker hub
+#       run: npm run docker:push-amd
+#       # I need to create this command in my package.json file
+
+#     # Login to AWS ECR and push
+#     # Feels like there should be an easier way to simply upload the Dockerrun.aws.json file
+
+#     # https://akashsingh.blog/complete-guide-on-deploying-a-docker-application-react-to-aws-elastic-beanstalk-using-docker-hub-and-github-actions
+
+#     - name: Upload Dockerrun.aws.json to AWS Elastic Beanstalk
+#       uses: einaregilsson/beanstalk-deploy@v19
+#       with:
+#         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#         application_name: your-application-name
+#         environment_name: your-environment-name
+#         version_label: your-version-label
+#         region: your-aws-region
+#         file: Dockerrun.aws.json
+    
