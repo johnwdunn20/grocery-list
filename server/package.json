@@ -4,8 +4,7 @@
     "build": "babel src --out-dir dist --extensions '.ts,.js' --minified --no-comments",
     "clean": "rm -rf dist",
     "dev": "nodemon --exec babel-node --extensions '.ts,.js' src/server.ts",
-    "docker:build": "docker build --no-cache -t grocery/prod .",
-    "docker:build-amd": "grocery-list % docker build --platform linux/amd64 -t johnwdunn/grocery:prod-amd ."
+    "docker:build": "docker build --no-cache -t grocery/prod ."
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",
