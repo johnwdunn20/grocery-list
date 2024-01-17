@@ -25,7 +25,7 @@ const HomePage = () => {
   // check if user is logged in
   const checkIfLoggedIn = async () => {
     try {
-      const response = await fetch('/api/isLoggedIn', {
+      const response = await fetch(`/api/isLoggedIn`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -51,7 +51,7 @@ const HomePage = () => {
   // get initial data on page load
   const getGroceries = async () => {
     try {
-      const response = await fetch('/api/groceries');
+      const response = await fetch(`/api/groceries`);
       
       if (!response.ok) {
         return console.log('Error fetching groceries');
@@ -86,7 +86,7 @@ const HomePage = () => {
     inputElem.value = '';
     // if user isn't logged in, just get the category to display it
     if (!isLoggedIn) {
-      fetch('/api/category', {
+      fetch(`/api/category`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -101,7 +101,7 @@ const HomePage = () => {
         .catch(err => console.log(err));
     } else {
       // if user is logged in, add to the db
-      fetch('/api/addItem', {
+      fetch(`/api/addItem`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -192,7 +192,7 @@ const HomePage = () => {
 
     // update db
     try {
-      const response = await fetch('/api/clearAll', {
+      const response = await fetch(`/api/clearAll`, {
         method: 'POST'
       });
       if (response.ok) {
@@ -216,7 +216,7 @@ const HomePage = () => {
     setGroceries(updatedGroceries);
     // update db
     try {
-      const response = await fetch('/api/clearFound', {
+      const response = await fetch(`/api/clearFound`, {
         method: 'POST'
       });
       if (response.ok) {

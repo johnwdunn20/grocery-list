@@ -3,7 +3,8 @@
     "start": "node dist/server.js",
     "build": "babel src --out-dir dist --extensions '.ts,.js' --minified --no-comments",
     "clean": "rm -rf dist",
-    "dev": "nodemon --exec babel-node --extensions '.ts,.js' src/server.ts"
+    "dev": "nodemon --exec babel-node --extensions '.ts,.js' src/server.ts",
+    "docker:build": "docker build --no-cache -t grocery/prod ."
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",

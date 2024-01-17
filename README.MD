@@ -10,11 +10,11 @@ Automatically sort your groceris by aisle
 
 ## Usage
 
-Examples and instructions on how to use your project.
+Head over to supermarketsorter.com, create an account, and try it out! Any feedback is welcome.
 
 ## Contributing
 
-Guidelines for contributing to your project.
+Fork the repo and create a pr. If forking the repo, requires an OpenAI API Key and MongoDB.
 
 ## License
 

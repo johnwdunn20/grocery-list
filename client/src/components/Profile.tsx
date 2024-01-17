@@ -14,9 +14,9 @@ const Profile:React.FC<ProfileProps> = ({ profileOpen, closeProfile,  isLoggedIn
   const navigate = useNavigate();
 
   const signOut = async () => {
-    const response = await fetch('/api/logout', {
+    const response = await fetch(`/api/logout`, {
       method: 'POST',
-      credentials: 'include'
+      // credentials: 'include'
     })
     if (response.ok) {
       navigate('/login');

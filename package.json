@@ -10,7 +10,12 @@
     "install-server": "cd server && npm i",
     "install-client": "cd client && npm i",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "build-client": "cd client && npm run build",
+    "build-server": "cd server && npm run build",
+    "docker:build-arm": "docker build -t johnwdunn/grocery:prod-arm .",
+    "docker:run-arm": "**need to define this command",
+    "docker:build-amd": "docker build --platform linux/amd64 -t johnwdunn/grocery:prod-amd ."
   },
   "repository": {
     "type": "git",
