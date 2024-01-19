@@ -2,15 +2,23 @@ import path from 'path';
 import express, { Express, Request, Response, NextFunction,} from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import https from 'https';
 // import controllers
 import databaseController from './controllers/database';
 import authController from './controllers/auth';
 import openAIController from './controllers/openAi';
 import 'dotenv/config';
 
+
 const PORT = process.env.PORT || 3000;
 const app: Express = express();
+
+// redirect http to https
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   if (req.headers['x-forwarded-proto'] !== 'https') {
+//     return res.redirect('https://' + req.headers.host + req.url);
+//   }
+//   return next();
+// });
 
 // Serve static files from the client's build directory for production
 app.use(express.static(path.join(__dirname, '../../client/dist')));
