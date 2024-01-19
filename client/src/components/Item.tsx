@@ -2,6 +2,16 @@ import React from 'react'
 import DeleteItemMobile from './DeleteItemMobile';
 import DeleteItemDesktop from './DeleteItemDesktop';
 
+type ItemProps = {
+  itemName: string,
+  checked: boolean,
+  id: string,
+  deleteItem: Function,
+  toggleCheck: Function,
+  index: number,
+  categoryId: string
+}
+
 const Item = ({itemName, checked, id, deleteItem, toggleCheck, index, categoryId}) => {
 
 

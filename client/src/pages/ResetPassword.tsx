@@ -13,7 +13,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
@@ -21,12 +21,12 @@ const Login = () => {
     }
   })
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data)
+    // console.log(data)
     // need to send an email
   }
 
-  console.log('Errors: ', errors);
-  console.log(watch("email"));
+  // console.log('Errors: ', errors);
+  // console.log(watch("email"));
 
   return (
     <main className='h-screen flex flex-col justify-center items-center bg-primaryBlue'>

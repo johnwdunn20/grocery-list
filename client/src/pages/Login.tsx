@@ -8,14 +8,14 @@ type Inputs = {
   password: string
 }
 
-const Login = () => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
   const [incorrectLoginInfo, setIncorrectLoginInfo] = React.useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
@@ -24,7 +24,7 @@ const Login = () => {
     }
   })
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data)
+    // console.log(data)
     const response = await fetch(`/api/login`, {
       method: 'POST',
       headers: {

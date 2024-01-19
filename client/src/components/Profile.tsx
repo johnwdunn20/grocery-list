@@ -27,7 +27,7 @@ const Profile:React.FC<ProfileProps> = ({ profileOpen, closeProfile,  isLoggedIn
     navigate('/login');
   }
 
-  console.log('isLoggedIn: ', isLoggedIn);
+  // console.log('isLoggedIn: ', isLoggedIn);
 
   return (
     <>

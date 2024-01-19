@@ -24,7 +24,7 @@ COPY --from=server-build /app/node_modules ./server/node_modules
 # right now it's not copying environment variables - need to set them up when I run the container
 
 # Expose the port the app runs in
-EXPOSE 3000
+EXPOSE 443
 
 # Set up your start command
 CMD ["node", "./server/dist/server.js"]

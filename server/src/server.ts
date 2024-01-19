@@ -8,8 +8,17 @@ import authController from './controllers/auth';
 import openAIController from './controllers/openAi';
 import 'dotenv/config';
 
+
 const PORT = process.env.PORT || 3000;
 const app: Express = express();
+
+// redirect http to https
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   if (req.headers['x-forwarded-proto'] !== 'https') {
+//     return res.redirect('https://' + req.headers.host + req.url);
+//   }
+//   return next();
+// });
 
 // Serve static files from the client's build directory for production
 app.use(express.static(path.join(__dirname, '../../client/dist')));
@@ -122,6 +131,19 @@ apiRouter.get('/isLoggedIn',
     return res.status(200).json(res.locals.name);
   }
 );
+
+// Catch-all routes to serve index.html for unknown routes
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+});
+
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+});
+
+app.get('/resetpassword', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+});
 
 // catch-all
 app.use('*', (req: Request, res: Response) => {

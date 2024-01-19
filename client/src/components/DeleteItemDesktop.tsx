@@ -2,7 +2,13 @@ import React, { useState } from 'react'
 import { useSwipeable } from 'react-swipeable';
 import deleteIcon from '../images/delete.svg';
 
-const DeleteItemDesktop = ({deleteItem, id, categoryId}) => {
+type DeleteItemDesktopProps = {
+  deleteItem: Function,
+  id: string,
+  categoryId: string
+}
+
+const DeleteItemDesktop: React.FC<DeleteItemDesktopProps> = ({deleteItem, id, categoryId}) => {
 
   // If desktop, just use a button to delete
   return (

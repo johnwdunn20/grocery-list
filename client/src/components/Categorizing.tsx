@@ -18,7 +18,7 @@ const Categorizing = ({ lastCategory, newItem, updateNewItem, resetLastCategory 
     }
   }, [newItem, lastCategory]);
 
-  console.log('lastCategory: ', lastCategory);
+  // console.log('lastCategory: ', lastCategory);
 
   return (
     <>
