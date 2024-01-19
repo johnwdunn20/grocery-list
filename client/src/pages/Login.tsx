@@ -24,7 +24,7 @@ const Login: React.FC = () => {
     }
   })
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data)
+    // console.log(data)
     const response = await fetch(`/api/login`, {
       method: 'POST',
       headers: {

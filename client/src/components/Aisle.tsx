@@ -15,7 +15,7 @@ const Aisle:React.FC<AisleProps> = ({ aisleTitle, itemsArr, deleteItem, toggleCh
 
   useEffect(() => {
     setItemElems(itemsArr.map((itemObj, index) => {
-      console.log('useEffect in ShoppingListContainer');
+      // console.log('useEffect in ShoppingListContainer');
       return (
         <Item
           key={itemObj._id}

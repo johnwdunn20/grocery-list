@@ -11,7 +11,7 @@ type ShoppingListContainerProps = {
 }
 
 const ShoppingListContainer = ({ groceries, deleteItem, toggleCheck, clearAll, clearFound, showHidePurchasedItems}) => {
-  console.log('Groceries: ', groceries);
+  // console.log('Groceries: ', groceries);
 
   const [aisleElems, setAisleElems] = useState([])
   const [isToggled, setIsToggled] = useState(false);

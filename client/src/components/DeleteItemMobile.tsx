@@ -3,7 +3,7 @@ import { useSwipeable } from 'react-swipeable';
 import deleteIcon from '../images/delete.svg';
 
 const DeleteItemMobile = ({deleteItem, id, categoryId}) => {
-  console.log('innerWidth', window.innerWidth);
+  // console.log('innerWidth', window.innerWidth);
 
   const [swipeDistance, setSwipeDistance] = useState(0);
   const threshold = 50; // Threshold to delete

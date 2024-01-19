@@ -20,7 +20,7 @@ const HomePage = () => {
   const [newItemToggle, setNewItemToggle] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [username, setUsername] = useState<string>('');
-  console.log('isLoggedin: ', isLoggedIn);
+  // console.log('isLoggedin: ', isLoggedIn);
 
   // check if user is logged in
   const checkIfLoggedIn = async () => {
@@ -37,8 +37,8 @@ const HomePage = () => {
         setIsLoggedIn(true);
         const data = await response.json();
         setUsername(data);
-        console.log(data);
-        console.log('isLoggedin: ', isLoggedIn);
+        // console.log(data);
+        // console.log('isLoggedin: ', isLoggedIn);
       }
     } catch (err) {
       console.log(err);
@@ -180,7 +180,7 @@ const HomePage = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Deleted: ', data);
+        // console.log('Deleted: ', data);
         if (data) setNewItemToggle(!newItemToggle);
       })
       .catch(err => console.log(err));
@@ -198,8 +198,8 @@ const HomePage = () => {
       if (response.ok) {
         setNewItemToggle(!newItemToggle);
       } else {
-        console.log('Error clearing all items');
-        console.log(response);
+        // console.log('Error clearing all items');
+        // console.log(response);
       }
     } catch (err) {
       console.log(err);
@@ -212,7 +212,7 @@ const HomePage = () => {
       const updatedItems = grocery.items.filter(item => item.checked === false);
       return { ...grocery, items: updatedItems };
     });
-    console.log('Updated groceries: ', updatedGroceries);
+    // console.log('Updated groceries: ', updatedGroceries);
     setGroceries(updatedGroceries);
     // update db
     try {
@@ -240,7 +240,7 @@ const HomePage = () => {
         const updatedItems = grocery.items.filter(item => item.checked === false);
         return { ...grocery, items: updatedItems };
       });
-      console.log('Updated groceries: ', updatedGroceries);
+      // console.log('Updated groceries: ', updatedGroceries);
       setGroceries(updatedGroceries);
     }
     setShowingPurchasedItems(!showingPurchasedItems);

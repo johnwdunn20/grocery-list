@@ -30,7 +30,7 @@ const FullNavBar:React.FC<FullNavBarProps> = ({ isLoggedIn, username }) => {
     const closeProfile = () => {
       setProfileOpen(false);
     }
-  console.log('FullNavBar isLoggedIn: ', isLoggedIn);
+  // console.log('FullNavBar isLoggedIn: ', isLoggedIn);
   return (
     <div className="w-full lg:w-3/4 xl:w-2/3 mx-auto">
       <SideBar sideBarOpen={sideBarOpen} closeSideBar={closeSideBar} />
