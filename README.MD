@@ -10,7 +10,7 @@ Automatically sort your groceris by aisle
 
 ## Usage
 
-Head over to supermarketsorter.com, create an account, and try it out! Any feedback is welcome.
+Head over to [supermarketsorter.com](https://supermarketsorter.com), create an account, and try it out! Any feedback is welcome.
 
 ## Contributing
 
