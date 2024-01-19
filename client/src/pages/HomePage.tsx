@@ -4,11 +4,9 @@ import React, { useEffect, useState } from "react";
 import Header from '../components/Header';
 import NewItem from '../components/NewItem';
 import ShoppingListContainer from '../components/ShoppingListContainer'
-import SideBar from "../components/SideBar";
-import Profile from "../components/Profile";
-import { set } from "react-hook-form";
 import FullNavBar from "../components/FullNavBar";
 import { Link } from "react-router-dom";
+import warning from '../images/warning.png';
 
 const HomePage = () => {
 
@@ -18,7 +16,7 @@ const HomePage = () => {
   const [newItem, setNewItem] = useState<string>('');
   const [showingPurchasedItems, setShowingPurchasedItems] = useState<boolean>(true);
   const [newItemToggle, setNewItemToggle] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const [username, setUsername] = useState<string>('');
   // console.log('isLoggedin: ', isLoggedIn);
 
@@ -38,9 +36,11 @@ const HomePage = () => {
         const data = await response.json();
         setUsername(data);
         // console.log(data);
-        // console.log('isLoggedin: ', isLoggedIn);
+      } else {
+        setIsLoggedIn(false);
       }
-    } catch (err) {
+    } catch (err) { 
+      setIsLoggedIn(false);
       console.log(err);
     }
   }
@@ -254,7 +254,11 @@ const HomePage = () => {
         <NewItem saveNewItem={saveNewItem} lastCategory={lastCategory} newItem={newItem} updateNewItem={updateNewItem} resetLastCategory={resetLastCategory} />
         {!isLoggedIn &&
           <section className="flex justify-center items-center">
-              <Link className="text-2xl p-2 text-center text-zinc-100 bg-red-500 rounded-md sm:w-2/3 md:w-1/2 h-12 italic" to='/login'>Login to Save your List</Link> 
+              <Link className="text-2xl p-2 text-center text-zinc-100 bg-red-500 rounded-md sm:w-2/3 md:w-1/2 h-12 italic flex justify-around" to='/login'>
+                <img src={warning} alt="warning" />
+                Login to Save your List
+                <img src={warning} alt="warning" />
+                </Link> 
           </section>
         }
         <ShoppingListContainer groceries={groceries} deleteItem={deleteItem} toggleCheck={toggleCheck} clearAll={clearAll} clearFound={clearFound} showHidePurchasedItems={showHidePurchasedItems}/>
