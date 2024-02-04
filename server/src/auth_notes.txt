@@ -1,0 +1,9 @@
+# Steps to persist multiple sessions
+1. Create sessions collections in mongo - add a TTL index to automatically delete old documents 
+2. On all auth middleware, check the collection
+  a. login: create new document
+  b. isLoggedIn: check it
+  c. loggedout: delete document
+
+*** Google rank
+- Google is not indexing the page due to 400 requests. Need to modify it when user is not logged in
