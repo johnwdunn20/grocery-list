@@ -74,8 +74,16 @@ const authController = {
       const token = createToken(user.id);
       // set cookie
       res.cookie('jwt', token, { httpOnly: true, secure: true });
-      // send back user id?
+      // send back user id
       res.locals.id = user.id;
+
+      // create a session in the database
+      // const session = await models.Session.create({
+      //   user: user.id,
+      //   token: token,
+      //   expiration: new Date(Date.now() + parseInt(process.env.JWT_EXPIRATION) * 1000)
+      // });
+
       return next();
 
     } catch (err) {

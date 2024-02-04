@@ -28,6 +28,24 @@ const usersSchema = new Schema({
 
 const User = mongoose.model('user', usersSchema);
 
+// Sessions schema
+const sessionsSchema = new Schema({
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: 'user'
+  },
+  token: {
+    type: String,
+    required: true,
+  },
+  expiration: {
+    type: Date,
+    required: true,
+  }
+});
+
+const Session = mongoose.model('session', sessionsSchema);
+
 // Item Schema
 const itemSchema = new Schema({
   user: {
@@ -74,5 +92,6 @@ const Grocery = mongoose.model('grocery', grocerySchema);
 export default {
   User,
   Grocery,
-  Item
+  Item,
+  Session,
 };
