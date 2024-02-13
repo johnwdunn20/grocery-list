@@ -1,1 +1,3 @@
 // Client hot reloading requires npm run build in the client folder when using the docker container
+
+Docker should automatically build both
