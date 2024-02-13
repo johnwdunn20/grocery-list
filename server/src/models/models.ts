@@ -28,6 +28,30 @@ const usersSchema = new Schema({
 
 const User = mongoose.model('user', usersSchema);
 
+
+
+// Sessions schema
+const sessionsSchema = new Schema({
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: 'user'
+  },
+  token: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    // time document expires in seconds
+    expires: typeof process.env.JWT_EXPIRATION === 'number'
+      ? Number(process.env.JWT_EXPIRATION) / 60 :
+      10000000000 / 60,
+  }
+});
+
+const Session = mongoose.model('session', sessionsSchema);
+
 // Item Schema
 const itemSchema = new Schema({
   user: {
@@ -74,5 +98,6 @@ const Grocery = mongoose.model('grocery', grocerySchema);
 export default {
   User,
   Grocery,
-  Item
+  Item,
+  Session,
 };
