@@ -1,8 +1,8 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import 'dotenv/config';
-import { Request, Response, NextFunction } from 'express';
-import models from '../models/models';
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import "dotenv/config";
+import { Request, Response, NextFunction } from "express";
+import models from "../models/models";
 
 const SALT_WORK_FACTOR = 10;
 
@@ -12,10 +12,12 @@ function createToken(id: string) {
   // payload - obj: use primary key value
   // secret key: string stored in .env
   // options - includes:
-    // algorithm (defaults to HS256)
-    // expiresIn (seconds?)
+  // algorithm (defaults to HS256)
+  // expiresIn (seconds?)
   // callback
-  return jwt.sign({ id }, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRATION});
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRATION,
+  });
 }
 
 // helper function to hash passwords
@@ -26,7 +28,7 @@ function hashPassword(password: string) {
         reject({
           log: `Error hashing password`,
           status: 500,
-          message: { err: `Error in signup`},
+          message: { err: `Error in signup` },
         });
       } else {
         resolve(hash);
@@ -34,7 +36,6 @@ function hashPassword(password: string) {
     });
   });
 }
-
 
 const authController = {
   login: async (req: Request, res: Response, next: NextFunction) => {
@@ -45,18 +46,20 @@ const authController = {
         return next({
           log: `Missing email or password`,
           status: 400,
-          message: { err: `Missing email or password`},
+          message: { err: `Missing email or password` },
         });
       }
       // check if user exists
-      const user = await models.User.findOne({ email: email.toLowerCase()}).exec();
+      const user = await models.User.findOne({
+        email: email.toLowerCase(),
+      }).exec();
       if (!user) {
         // invoke bcrypt.compare on something random to prevent timing attacks
-        const result = await bcrypt.compare('random', 'random');
+        const result = await bcrypt.compare("random", "random");
         return next({
           log: `Email/password combo does not exist`,
           status: 400,
-          message: { err: `Email does not exist`},
+          message: { err: `Email does not exist` },
         });
       }
 
@@ -67,14 +70,19 @@ const authController = {
         return next({
           log: `Email/password combo does not exist`,
           status: 400,
-          message: { err: `Incorrect Password`},
+          message: { err: `Incorrect Password` },
         });
       }
 
       // create token
       const token = createToken(user.id);
+      // insert into session
+      const session = await models.Session.create({
+        user: user.id,
+        token: token,
+      });
       // set cookie
-      res.cookie('jwt', token, { httpOnly: true, secure: true });
+      res.cookie("jwt", token, { httpOnly: true, secure: true });
       // send back user id
       res.locals.id = user.id;
 
@@ -86,7 +94,6 @@ const authController = {
       // });
 
       return next();
-
     } catch (err) {
       return next({
         log: `Express error handler caught error in authController.login. Error: ${err}`,
@@ -98,8 +105,13 @@ const authController = {
 
   logout: async (req: Request, res: Response, next: NextFunction) => {
     try {
+      // delete session from database
+      console.log("req.cookies.jwt", req.cookies.jwt);
+      await models.Session.deleteOne({ token: req.cookies.jwt });
+
       // delete cookie (effectively sets expiration date to now so it immediately expires)
-      res.clearCookie('jwt');
+      res.clearCookie("jwt");
+
       return next();
     } catch (err) {
       return next({
@@ -117,16 +129,18 @@ const authController = {
         return next({
           log: `Missing name, email, or password`,
           status: 400,
-          message: { err: `Missing name, email, or password`},
+          message: { err: `Missing name, email, or password` },
         });
       }
       // check if user exists
-      const user = await models.User.findOne({ email: email.toLowerCase() }).exec();
+      const user = await models.User.findOne({
+        email: email.toLowerCase(),
+      }).exec();
       if (user) {
         return next({
           log: `User already exists`,
           status: 400,
-          message: { err: `User already exists`},
+          message: { err: `User already exists` },
         });
       }
       // hash password
@@ -139,14 +153,16 @@ const authController = {
       });
       // create token
       const token = createToken(newUser.id);
+
       // insert into session
-      console.log('newUser.id', newUser.id);
+      console.log("newUser.id", newUser.id);
       const session = await models.Session.create({
         user: newUser.id,
         token: token,
       });
+
       // set cookie
-      res.cookie('jwt', token, { httpOnly: true, secure: true });
+      res.cookie("jwt", token, { httpOnly: true, secure: true });
       // send back user id?
       res.locals.id = newUser.id;
       return next();
@@ -168,7 +184,7 @@ const authController = {
         return next({
           log: `No token on JWT`,
           status: 400,
-          message: { err: `No token`},
+          message: { err: `No token` },
         });
       }
       // verify token
@@ -179,9 +195,22 @@ const authController = {
         return next({
           log: `User does not exist`,
           status: 400,
-          message: { err: `User does not exist`},
+          message: { err: `User does not exist` },
         });
       }
+      // check if session exists
+      const session = await models.Session.findOne({
+        user: user.id,
+        token: token,
+      }).exec();
+      // if session doesn't exist, create a new one
+      if (!session) {
+        const newSession = await models.Session.create({
+          user: user.id,
+          token: token,
+        });
+      }
+
       // set userId on res.locals
       res.locals.id = user.id;
       res.locals.name = user.name;
@@ -193,7 +222,7 @@ const authController = {
         message: { err },
       });
     }
-  }
+  },
 };
 
 export default authController;
