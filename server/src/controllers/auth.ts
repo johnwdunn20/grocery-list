@@ -139,6 +139,12 @@ const authController = {
       });
       // create token
       const token = createToken(newUser.id);
+      // insert into session
+      console.log('newUser.id', newUser.id);
+      const session = await models.Session.create({
+        user: newUser.id,
+        token: token,
+      });
       // set cookie
       res.cookie('jwt', token, { httpOnly: true, secure: true });
       // send back user id?

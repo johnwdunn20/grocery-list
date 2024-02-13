@@ -28,6 +28,8 @@ const usersSchema = new Schema({
 
 const User = mongoose.model('user', usersSchema);
 
+
+
 // Sessions schema
 const sessionsSchema = new Schema({
   user: {
@@ -38,9 +40,13 @@ const sessionsSchema = new Schema({
     type: String,
     required: true,
   },
-  expiration: {
+  createdAt: {
     type: Date,
-    required: true,
+    default: Date.now,
+    // time document expires in seconds
+    expires: typeof process.env.JWT_EXPIRATION === 'number'
+      ? Number(process.env.JWT_EXPIRATION) / 60 :
+      10000000000 / 60,
   }
 });
 
