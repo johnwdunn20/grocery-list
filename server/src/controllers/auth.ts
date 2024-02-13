@@ -49,7 +49,7 @@ const authController = {
         });
       }
       // check if user exists
-      const user = await models.User.findOne({ email: email}).exec();
+      const user = await models.User.findOne({ email: email.toLowerCase()}).exec();
       if (!user) {
         // invoke bcrypt.compare on something random to prevent timing attacks
         const result = await bcrypt.compare('random', 'random');
@@ -59,6 +59,7 @@ const authController = {
           message: { err: `Email does not exist`},
         });
       }
+
       // check if password matches
       const match = await bcrypt.compare(password, user.password);
       // if it doesn't, return error
@@ -120,7 +121,7 @@ const authController = {
         });
       }
       // check if user exists
-      const user = await models.User.findOne({ email: email }).exec();
+      const user = await models.User.findOne({ email: email.toLowerCase() }).exec();
       if (user) {
         return next({
           log: `User already exists`,
@@ -133,7 +134,7 @@ const authController = {
       // create user
       const newUser = await models.User.create({
         name: name,
-        email: email,
+        email: email.toLowerCase(),
         password: hashedPassword,
       });
       // create token
