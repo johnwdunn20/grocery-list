@@ -6,7 +6,7 @@ const DeleteItemMobile = ({deleteItem, id, categoryId}) => {
   // console.log('innerWidth', window.innerWidth);
 
   const [swipeDistance, setSwipeDistance] = useState(0);
-  const threshold = 50; // Threshold to delete
+  const threshold = 150; // Threshold to delete
 
   // Only use swipeable on mobile (1024 is tailwind's lg cut-off)
     const handlers = useSwipeable({
