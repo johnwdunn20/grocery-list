@@ -14,7 +14,7 @@ const DeleteItemMobile = ({deleteItem, id, categoryId}) => {
       onSwiping: (eventData) => {
         if (eventData.deltaX < 0) { // Only set swipe distance if swiping left
           setSwipeDistance(Math.abs(eventData.absX));
-          console.log('ONSWIPING - swipeDistance', swipeDistance);
+          // console.log('ONSWIPING - swipeDistance', swipeDistance);
         }
       },
       onSwipedLeft: () => {
@@ -28,7 +28,7 @@ const DeleteItemMobile = ({deleteItem, id, categoryId}) => {
       onSwiped: (eventData) => {
         // General reset on any swipe end, ensuring cleanup
         setSwipeDistance(0);
-        console.log('ONSWIPED - swipeDistance', swipeDistance);
+        // console.log('ONSWIPED - swipeDistance', swipeDistance);
       },
       trackMouse: true, // Use trackMouse for desktop testing
       preventScrollOnSwipe: true,

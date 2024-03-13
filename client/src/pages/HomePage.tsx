@@ -10,7 +10,7 @@ import warning from '../images/warning.png';
 
 const HomePage = () => {
 
-  console.log('HomePage');
+  // console.log('HomePage');
 
   const [groceries, setGroceries] = useState([])
 
@@ -21,7 +21,7 @@ const HomePage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const [username, setUsername] = useState<string>('');
   
-  console.log('showingPurchasedItems: ', showingPurchasedItems);
+  // console.log('showingPurchasedItems: ', showingPurchasedItems);
 
   // check if user is logged in
   const checkIfLoggedIn = async () => {
