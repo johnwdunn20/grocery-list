@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSwipeable } from 'react-swipeable';
 import deleteIcon from '../images/delete.svg';
+import { set } from 'react-hook-form';
 
 const DeleteItemMobile = ({deleteItem, id, categoryId}) => {
   // console.log('innerWidth', window.innerWidth);
@@ -13,6 +14,7 @@ const DeleteItemMobile = ({deleteItem, id, categoryId}) => {
       onSwiping: (eventData) => {
         if (eventData.deltaX < 0) { // Only set swipe distance if swiping left
           setSwipeDistance(Math.abs(eventData.absX));
+          // console.log('ONSWIPING - swipeDistance', swipeDistance);
         }
       },
       onSwipedLeft: () => {
@@ -23,8 +25,13 @@ const DeleteItemMobile = ({deleteItem, id, categoryId}) => {
           setSwipeDistance(0); // Reset swipe distance if the swipe was not enough
         }
       },
+      onSwiped: (eventData) => {
+        // General reset on any swipe end, ensuring cleanup
+        setSwipeDistance(0);
+        // console.log('ONSWIPED - swipeDistance', swipeDistance);
+      },
       trackMouse: true, // Use trackMouse for desktop testing
-      preventScrollOnSwipe: true
+      preventScrollOnSwipe: true,
     });
   
     // Calculate opacity and translate based on swipe distance

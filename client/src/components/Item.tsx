@@ -14,7 +14,6 @@ type ItemProps = {
 
 const Item = ({itemName, checked, id, deleteItem, toggleCheck, index, categoryId}) => {
 
-
   return (
     <>
     <div className={`flex items-center justify-between w-full h-full lg:h-6 py-0 pr-0 pl-4 rounded-md
