@@ -1,5 +1,6 @@
 # Project Title
 
+new test
 Automatically sort your groceris by aisle
 
 ## Table of Contents
@@ -18,7 +19,6 @@ Fork the repo and create a pr. If forking the repo, requires an OpenAI API Key a
 
 ## License
 
-ISC
----
+## ISC
 
 Create by John Dunn
