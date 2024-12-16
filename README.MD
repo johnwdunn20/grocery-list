@@ -1,6 +1,5 @@
 # Project Title
 
-new test
 Automatically sort your groceris by aisle
 
 ## Table of Contents
