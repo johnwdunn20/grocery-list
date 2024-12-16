@@ -13,8 +13,8 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "build-client": "cd client && npm run build",
     "build-server": "cd server && npm run build",
-    "docker:dev": "cd server && docker-compose up --build",
-    "docker:clean": "docker compose down -v"
+    "docker:dev": "cd server && docker compose -f docker-compose.dev.yml up --build",
+    "docker:clean": "cd server && docker compose -f docker-compose.dev.yml down -v"
   },
   "repository": {
     "type": "git",
