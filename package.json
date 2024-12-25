@@ -14,6 +14,7 @@
     "build-client": "cd client && npm run build",
     "build-server": "cd server && npm run build",
     "docker:dev": "cd server && docker compose -f docker-compose.dev.yml up --build",
+    "docker:dev-full": "npm-run-all --parallel docker:dev dev-client",
     "docker:clean": "cd server && docker compose -f docker-compose.dev.yml down -v"
   },
   "repository": {
