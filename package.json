@@ -13,11 +13,9 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "build-client": "cd client && npm run build",
     "build-server": "cd server && npm run build",
-    "docker:build-arm": "docker build -t johnwdunn/grocery:prod-arm .",
-    "docker:push-arm": "docker push johnwdunn/grocery:prod-arm",
-    "docker:build-amd": "docker build --platform linux/amd64 -t johnwdunn/grocery:prod-amd .",
-    "docker:push-amd": "docker push johnwdunn/grocery:prod-amd",
-    "docker:dev": "docker-compose up --build"
+    "docker:dev": "cd server && docker compose -f docker-compose.dev.yml up --build",
+    "docker:dev-full": "npm-run-all --parallel docker:dev dev-client",
+    "docker:dev-clean": "cd server && docker compose -f docker-compose.dev.yml down -v"
   },
   "repository": {
     "type": "git",

@@ -1,8 +1,7 @@
 import OpenAI from "openai";
 
-
 // this brings in env to add to the environment variables
-require('dotenv').config();
+require("dotenv").config();
 const API_KEY = process.env.OPENAI_API_KEY;
 
 const openai = new OpenAI({ apiKey: API_KEY });
@@ -103,42 +102,70 @@ Frozen vegetables
 
 const openAIController = {
   getCategory: async (req, res, next) => {
-    const openai = new OpenAI({ apiKey: API_KEY });
-    const { newItem } = req.body;
-    // invoke global error handler if no newItem
-    if (!newItem) {
-      return next({
-        log: `Express error handler caught error in openAIController.getCategory. Error: No newItem`,
-        status: 500,
-        message: { err: 'No new item sent' },
-      });
-    }
+    try {
+      const { newItem } = req.body;
+      // invoke global error handler if no newItem
+      if (!newItem) {
+        return next({
+          log: `Express error handler caught error in openAIController.getCategory. Error: No newItem`,
+          status: 400,
+          message: { err: "No new item sent" },
+        });
+      }
 
-    // invoke global error handler if newItem is too long (prevent abuse of my openAI key)
-    if (newItem.length > 50) {
-      return next({
-        log: `Express error handler caught error in openAIController.getCategory. Error: newItem is too long`,
-        status: 500,
-        message: { err: 'newItem is too long' },
-      });
-    }
+      // invoke global error handler if newItem is too long (prevent abuse of my openAI key)
+      if (newItem.length > 50) {
+        return next({
+          log: `Express error handler caught error in openAIController.getCategory. Error: newItem is too long`,
+          status: 400,
+          message: { err: "newItem is too long" },
+        });
+      }
 
-    // console.log('newItem: ', newItem);
-    const completion = await openai.chat.completions.create({
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: newItem }
-      ],
-      model: "gpt-3.5-turbo",
-    });
-  
-    // console.log(completion);
-    // console.log(completion.choices[0]);
-    // console.log(completion.choices[0].message.content);
-    res.locals.category = completion.choices[0].message.content;
-    // **** Need to handle for errors. check the status I get back
-    next();
-  }
+      // console.log('newItem: ', newItem);
+      const completion = await openai.chat.completions.create({
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: newItem },
+        ],
+        model: "gpt-4o-mini",
+      });
+
+      // console.log(completion);
+      // console.log(completion.choices[0]);
+      // console.log(completion.choices[0].message.content);
+      res.locals.category = completion.choices[0].message.content;
+      // **** Need to handle for errors. check the status I get back
+      next();
+    } catch (error) {
+      if (error instanceof OpenAI.APIError) {
+        return next({
+          log: `OpenAI API error in getCategory: ${error.message}`,
+          status: error.status || 500,
+          message: {
+            err:
+              error.error?.message || "An error occurred with the OpenAI API",
+          },
+        });
+      } else if (error instanceof Error) {
+        return next({
+          log: `Error in getCategory: ${error.message}`,
+          status: 500,
+          message: {
+            err: "An unexpected error occurred",
+          },
+        });
+      } else {
+        return next({
+          log: "Unknown error in getCategory",
+          status: 500,
+          message: {
+            err: "An unexpected error occurred",
+          },
+        });
+      }
+    }
+  },
 };
 
 // openAIController.getCategory({body: {newItem: 'chicken'}});
