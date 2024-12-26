@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { API_URL } from "../config";
+
 // Components
 import Header from "../components/Header";
 import NewItem from "../components/NewItem";
@@ -10,6 +10,9 @@ import warning from "../images/warning.png";
 
 const HomePage = () => {
   // console.log('HomePage');
+  console.log(`React App API URL: ${process.env.REACT_APP_API_URL}`);
+
+  const apiURL = process.env.REACT_APP_API_URL;
 
   const [groceries, setGroceries] = useState([]);
 
@@ -23,9 +26,8 @@ const HomePage = () => {
 
   // check if user is logged in
   const checkIfLoggedIn = async () => {
-    console.log(`React App API URL: ${API_URL}`);
     try {
-      const response = await fetch(`/api/isLoggedIn`, {
+      const response = await fetch(`${apiURL}/api/isLoggedIn`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -52,7 +54,7 @@ const HomePage = () => {
   // get initial data on page load
   const getGroceries = async () => {
     try {
-      const response = await fetch(`/api/groceries`);
+      const response = await fetch(`${apiURL}/api/groceries`);
 
       if (!response.ok) {
         return console.log("Error fetching groceries");
@@ -87,7 +89,7 @@ const HomePage = () => {
     inputElem.value = "";
     // if user isn't logged in, just get the category to display it
     if (!isLoggedIn) {
-      fetch(`/api/category`, {
+      fetch(`${apiURL}/api/category`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -102,7 +104,7 @@ const HomePage = () => {
         .catch((err) => console.log(err));
     } else {
       // if user is logged in, add to the db
-      fetch(`/api/addItem`, {
+      fetch(`${apiURL}/api/addItem`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -142,7 +144,7 @@ const HomePage = () => {
     setGroceries(updatedGroceries);
 
     // update in db
-    fetch(`/api/toggleCheck/`, {
+    fetch(`${apiURL}/api/toggleCheck/`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, categoryId, checked }),
@@ -175,7 +177,7 @@ const HomePage = () => {
 
     // update the database
     console.log("Sending request to delete: ", id);
-    fetch(`/api/deleteItem`, {
+    fetch(`${apiURL}/api/deleteItem`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, categoryId }),
@@ -194,7 +196,7 @@ const HomePage = () => {
 
     // update db
     try {
-      const response = await fetch(`/api/clearAll`, {
+      const response = await fetch(`${apiURL}/api/clearAll`, {
         method: "POST",
       });
       if (response.ok) {
@@ -220,7 +222,7 @@ const HomePage = () => {
     setGroceries(updatedGroceries);
     // update db
     try {
-      const response = await fetch(`/api/clearFound`, {
+      const response = await fetch(`${apiURL}/api/clearFound`, {
         method: "POST",
       });
       if (response.ok) {
