@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - super-market-sorter
 on:
   push:
     branches:
-      - azure-workflow
+      - main
   workflow_dispatch:
 
 jobs:
