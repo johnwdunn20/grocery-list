@@ -35,7 +35,7 @@ jobs:
       - name: Create build-time env file
         run: |
           cd client
-          echo "REACT_APP_API_URL=super-market-sorter-g5d0chf6ccaag7d9.westus2-01.azurewebsites.net" > .env
+          echo "REACT_APP_API_URL=https://super-market-sorter-g5d0chf6ccaag7d9.westus2-01.azurewebsites.net/" > .env
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
