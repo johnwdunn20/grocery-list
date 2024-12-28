@@ -82,7 +82,12 @@ const authController = {
         token: token,
       });
       // set cookie
-      res.cookie("jwt", token, { httpOnly: true, secure: true });
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        secure: true,
+        // Need to specify sameSite: "none" for cross-site cookies since my frontend is on a different domain than my backend
+        sameSite: "none",
+      });
       // send back user id
       res.locals.id = user.id;
 
