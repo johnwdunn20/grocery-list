@@ -31,6 +31,7 @@ const SignUp = () => {
     // navigate after verifying authentication
     const response = await fetch(`${apiURL}/api/signup`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

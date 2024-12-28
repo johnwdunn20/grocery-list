@@ -82,7 +82,12 @@ const authController = {
         token: token,
       });
       // set cookie
-      res.cookie("jwt", token, { httpOnly: true, secure: true });
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        secure: true,
+        // Need to specify sameSite: "none" for cross-site cookies since my frontend is on a different domain than my backend
+        sameSite: "none",
+      });
       // send back user id
       res.locals.id = user.id;
 
@@ -123,6 +128,7 @@ const authController = {
   },
 
   signup: async (req: Request, res: Response, next: NextFunction) => {
+    console.log("Signing up route");
     try {
       const { name, email, password } = req.body;
       if (!name || !email || !password) {

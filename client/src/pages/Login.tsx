@@ -29,6 +29,7 @@ const Login: React.FC = () => {
     // console.log(data)
     const response = await fetch(`${apiURL}/api/login`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

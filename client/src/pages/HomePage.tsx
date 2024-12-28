@@ -29,6 +29,7 @@ const HomePage = () => {
     try {
       const response = await fetch(`${apiURL}/api/isLoggedIn`, {
         method: "GET",
+        credentials: "include",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -54,7 +55,9 @@ const HomePage = () => {
   // get initial data on page load
   const getGroceries = async () => {
     try {
-      const response = await fetch(`${apiURL}/api/groceries`);
+      const response = await fetch(`${apiURL}/api/groceries`, {
+        credentials: "include",
+      });
 
       if (!response.ok) {
         return console.log("Error fetching groceries");
@@ -91,6 +94,7 @@ const HomePage = () => {
     if (!isLoggedIn) {
       fetch(`${apiURL}/api/category`, {
         method: "POST",
+        credentials: "include",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -106,6 +110,7 @@ const HomePage = () => {
       // if user is logged in, add to the db
       fetch(`${apiURL}/api/addItem`, {
         method: "POST",
+        credentials: "include",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -147,6 +152,7 @@ const HomePage = () => {
     fetch(`${apiURL}/api/toggleCheck/`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({ id, categoryId, checked }),
     })
       .then((response) => response.json())
@@ -180,6 +186,7 @@ const HomePage = () => {
     fetch(`${apiURL}/api/deleteItem`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({ id, categoryId }),
     })
       .then((response) => response.json())
@@ -198,6 +205,7 @@ const HomePage = () => {
     try {
       const response = await fetch(`${apiURL}/api/clearAll`, {
         method: "POST",
+        credentials: "include",
       });
       if (response.ok) {
         setNewItemToggle(!newItemToggle);
@@ -224,6 +232,7 @@ const HomePage = () => {
     try {
       const response = await fetch(`${apiURL}/api/clearFound`, {
         method: "POST",
+        credentials: "include",
       });
       if (response.ok) {
         setNewItemToggle(!newItemToggle);
