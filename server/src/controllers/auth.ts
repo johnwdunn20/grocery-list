@@ -128,6 +128,7 @@ const authController = {
   },
 
   signup: async (req: Request, res: Response, next: NextFunction) => {
+    console.log("Signing up route");
     try {
       const { name, email, password } = req.body;
       if (!name || !email || !password) {
