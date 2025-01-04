@@ -142,19 +142,6 @@ apiRouter.get(
   }
 );
 
-// Catch-all routes to serve index.html for unknown routes
-app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
-});
-
-app.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
-});
-
-app.get("/resetpassword", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
-});
-
 // catch-all
 app.use("*", (req: Request, res: Response) => {
   return res.status(400).send("The page you are looking for was not found");
