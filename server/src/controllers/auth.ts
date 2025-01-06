@@ -168,7 +168,11 @@ const authController = {
       });
 
       // set cookie
-      res.cookie("jwt", token, { httpOnly: true, secure: true });
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      });
       // send back user id?
       res.locals.id = newUser.id;
       return next();
